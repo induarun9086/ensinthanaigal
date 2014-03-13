@@ -43,7 +43,6 @@ public class PageServlet extends HttpServlet {
 				jsonArr.put(jsonObj);
 			}
 			data.put("data", jsonArr);
-			System.out.println(data);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

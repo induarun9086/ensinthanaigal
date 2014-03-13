@@ -1,6 +1,8 @@
 package com.ensinthanaigal.server.admin;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,6 +18,8 @@ import com.ensinthanaigal.server.util.AdminUtil;
 public class AdminServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+
+	private static final Logger log = Logger.getLogger("AdminServlet");
 
 	@Override
 	protected void doPost(HttpServletRequest request,
@@ -47,10 +51,10 @@ public class AdminServlet extends HttpServlet {
 
 			entityManager.getTransaction().commit();
 
-			System.out.println("post inserted successfully");
+			log.log(Level.INFO, "Post inserted successfully");
 		} catch (Exception e) {
-			System.out
-					.println("Exception occured while inserting post into the db"
+			log.log(Level.SEVERE,
+					"Exception occured while inserting post into the db"
 							+ e.getMessage());
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					e.getMessage());
