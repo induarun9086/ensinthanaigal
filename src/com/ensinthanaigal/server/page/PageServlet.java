@@ -30,7 +30,7 @@ public class PageServlet extends HttpServlet {
 			String category = request.getParameter("category");
 			TypedQuery<Object[]> q = entityManager
 					.createQuery(
-							"Select title,content from Post p where p.category = '" + category + "'",
+							"Select title,content from Post p where p.category = " + category ,
 							Object[].class);
 			List<Object[]> results = q.getResultList();
 
@@ -43,6 +43,7 @@ public class PageServlet extends HttpServlet {
 				jsonArr.put(jsonObj);
 			}
 			data.put("data", jsonArr);
+			response.getWriter().write(data.toString());;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

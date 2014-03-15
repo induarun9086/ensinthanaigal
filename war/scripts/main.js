@@ -1,8 +1,7 @@
 function startUp()
 {
     resizeMe();
-	/* getPage(0, 0); */
-	startRotator("#home-content-scroller");
+	getPage(0, 0);
 }
 
 function resizeMe()
@@ -23,10 +22,45 @@ function resizeMe()
 
 function getPage(catId, postId)
 {
-	$.post( "getPage/", { catId: catId, postId: postId }).done(function( data ) 
+    if(postId == 0)
 	{
-		alert( "Data Loaded: " + data );
-	});
+		if(catId == 0)
+		{
+		    $(".content-frame").load("home.html").ready( function() { startRotator("#home-content-scroller"); });
+		}
+		else if(catId == 1)
+		{
+			$(".content-frame").load("travel/index.html");
+		}
+	}
+	else
+	{
+		$.get( "getpage", { category: catId, postId: postId }).done(function( data ) 
+		{
+			$(".content-frame").html(createPost(data));
+		});
+	}
+}
+
+function createPost(jsonArr)
+{
+    var params = jQuery.parseJSON(jsonArr);
+	var data = "";
+	
+	if(params.data.length != 0)
+	{
+		data = data + '<div class="post-title">' + params.data[0].title + '</div>';
+		data = data + '<div class="post-path">' + '' + '</div>';
+		data = data + '<div class="post-date">' + '' + '</div>';
+		data = data + '<div class="post-body">' + params.data[0].content + '</div>';
+		data = data + '</div>';
+	}
+	else
+	{
+		data = data + '<div class="post-title"> OOPS! Someone made a boo-boo, bad developer! </div>';
+	}
+	
+	return data;
 }
 
 function rotateBanners(elem) {

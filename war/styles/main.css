@@ -1,17 +1,23 @@
 body {border:0px; margin:0px; padding:0px; font-size:15px; background:url('../imgs/bg.png');}
 a {}
 .home-bar {position:fixed; top:0px; left:0%; right: 0px; width:15%; padding:0px; text-align:right; }
+.home-bar:hover{cursor:pointer}
 .home-logo {width:99%;}
-.header-bar {border:0px; border-bottom:3px black double; padding:0px; margin:0px; padding-left:13.8%; padding-right:18%; background-color: lightgrey; width:88%; font-family:Combo; background:url('../imgs/header-bg.png'); box-shadow:0px 0px 33px #111111;}
+.header-bar {border:0px; border-bottom:3px black double; padding:0px; margin:0px; padding-left:13.8%; padding-right:18%; background-color: lightgrey; width:68.2%; font-family:Combo; background:url('../imgs/header-bg.png'); box-shadow:0px 0px 33px #111111;}
 .header-nav {display:inline-block; margin:0px; padding:0.9%; border:0px; border-left: 2px black solid; border-right: 2px black solid; border-radius:33%; font-size: 150%; background: url('../imgs/btn-bg.png'); text-shadow:0px 0px 3px #333333;}
 .header-nav:hover {cursor:pointer; }
 .dummy-header-nav-left {display:inline-block; margin:0px; padding:0.9%; border:0px; border-right: 2px black solid; border-radius:33%; font-size: 150%;}
 .dummy-header-nav-right {display:inline-block; margin:0px; padding:0.9%; border:0px; border-left: 2px black solid; border-radius:33%; font-size: 150%;}
 .dummy-header-nav-left:hover {}
 .dummy-header-nav-right:hover {}
-.social-bar {position:fixed; top:0px; left:84%; right: 0px; width:15%; padding:0.45%; text-align:right; font-size: 150%;}
-.social-logo { width:18%;}
+.social-bar {position:fixed; top:0px; left:84%; right: 0px; width:15%; padding:0.45%; padding-top:0px; text-align:right; font-size: 150%;}
+.social-logo { width:15%; }
 .social-logo:hover {cursor:pointer; }
 
 .home-content-scroller {position:fixed; top:12%; left:9%; right:9%; bottom:33%; padding:0px; text-align:center; border:2px solid black; border-radius:9%; overflow:hidden; box-shadow:6px 6px 12px #111111;}
 #home-content-scroller img { position: absolute; top:0%; left:0%; right:0%; bottom:0%; width:100%; margin:auto; overflow:hidden; }
+
+.post-title{text-align:center;font-size:180%;margin-top:1.2%;font-family:Courgette}
+.post-body{margin:9%;margin-top:0.9%;margin-bottom:0.9%;padding:0.3%;font-family:combo;}
+
+.footer-bar{position:fixed;bottom:0%;width:98.2%;left:0%;right:0%;border:0px;border-top:3px black double;background-color: lightgrey; font-family:Combo; background:url('../imgs/header-bg.png'); box-shadow:0px 0px 33px #111111;font-size:72%;text-align:center;padding-left:0.9%;padding-right:0.9%;}
