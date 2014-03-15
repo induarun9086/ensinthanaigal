@@ -1,3 +1,6 @@
+var bannerElem;
+var bannerRotator;
+
 function startUp()
 {
     resizeMe();
@@ -26,11 +29,23 @@ function getPage(catId, postId)
 	{
 		if(catId == 0)
 		{
-		    $(".content-frame").load("home.html").ready( function() { startRotator("#home-content-scroller"); });
+		    $(".content-frame").load("home.html", function() { startRotator("#home-content-scroller"); });
 		}
 		else if(catId == 1)
 		{
 			$(".content-frame").load("travel/index.html");
+		}
+		else if(catId == 2)
+		{
+			$(".content-frame").load("cooking/index.html");
+		}
+		else if(catId == 3)
+		{
+			$(".content-frame").load("entertainment/index.html");
+		}
+		else if(catId == 4)
+		{
+			$(".content-frame").load("technology/index.html");
 		}
 	}
 	else
@@ -63,13 +78,30 @@ function createPost(jsonArr)
 	return data;
 }
 
-function rotateBanners(elem) {
+function rotateBanners(elem, dir) {
   var active = $(elem+" img.active");
-  var next = active.next();
+  if(dir == 0) {
+	var next = active.next();
+  }
+  else {
+	var next = active.prev();
+  }
   if (next.length == 0) 
     next = $(elem+" img:first");
   active.removeClass("active").fadeOut(1000);
   next.addClass("active").fadeIn(1000);
+}
+
+function nextBanner() {
+  clearInterval(bannerRotator);
+  rotateBanners(bannerElem, 0);
+  bannerRotator = setInterval("rotateBanners('"+bannerElem+"',0)", 6000);
+}
+
+function prevBanner() {
+  clearInterval(bannerRotator);
+  rotateBanners(bannerElem, 1);
+  bannerRotator = setInterval("rotateBanners('"+bannerElem+"',0)", 6000);
 }
  
 function prepareRotator(elem) {
@@ -79,5 +111,6 @@ function prepareRotator(elem) {
  
 function startRotator(elem) {
   prepareRotator(elem);
-  setInterval("rotateBanners('"+elem+"')", 6000);
+  bannerElem = elem;
+  bannerRotator = setInterval("rotateBanners('"+elem+"',0)", 6000);
 }
