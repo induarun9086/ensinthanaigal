@@ -1,6 +1,8 @@
 package com.ensinthanaigal.server.admin;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,12 +40,16 @@ public class AdminServlet extends HttpServlet {
 			EntityManagerFactory emfInstance = Persistence
 					.createEntityManagerFactory("posts");
 			entityManager = emfInstance.createEntityManager();
+			
+			Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+			long createdTime = cal.getTimeInMillis();
 
 			Post post = new Post();
 			post.setTitle(title);
 			post.setContent(content);
 			post.setTags(tags);
 			post.setCategory(Integer.valueOf(category));
+			post.setPostedAt(createdTime);
 
 			entityManager.getTransaction().begin();
 

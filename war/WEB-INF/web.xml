@@ -30,4 +30,14 @@
 		<servlet-class>com.ensinthanaigal.server.page.PageServlet</servlet-class>
 	</servlet>
 
+	<servlet-mapping>
+		<servlet-name>postServlet</servlet-name>
+		<url-pattern>/posts</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>postServlet</servlet-name>
+		<servlet-class>com.ensinthanaigal.server.posts.PostServlet</servlet-class>
+	</servlet>
+
 </web-app>
