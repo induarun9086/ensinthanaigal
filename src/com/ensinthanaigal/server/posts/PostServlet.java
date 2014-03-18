@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ensinthanaigal.server.util.AdminUtil;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
@@ -28,9 +29,25 @@ public class PostServlet extends HttpServlet {
 		EntityManager entityManager = emfInstance.createEntityManager();
 		try {
 			String category = request.getParameter("category");
-			Query q = entityManager
-					.createQuery("Select title from Post p where p.category = "
-							+ category);
+			String query = "Select title from Post p";
+			if (AdminUtil.isNotNullOrEmpty(category)) {
+				query = query + " where p.category = " + category;
+			}
+			String sortorder = request.getParameter("sortorder");
+
+			if (AdminUtil.isNotNullOrEmpty(sortorder)) {
+				String orderBy = "DESC";
+				if (Integer.valueOf(sortorder) == 0) {
+					orderBy = "ASC";
+				}
+				query = query + " ORDER BY p.postedAt " + orderBy;
+			}
+			Query q = entityManager.createQuery(query);
+			String limit = request.getParameter("limit");
+			if (AdminUtil.isNotNullOrEmpty(limit)) {
+				q.setMaxResults(Integer.valueOf(limit));
+			}
+
 			List<String> results = q.getResultList();
 
 			JSONObject data = new JSONObject();
