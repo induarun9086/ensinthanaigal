@@ -38,6 +38,11 @@ public class AdminServlet extends HttpServlet
 		    request.getParameter("tags"),"tags");
 	    String category = AdminUtil.checkForNullOrEmpty(
 		    request.getParameter("category"),"category");
+	    boolean testMode = Boolean.TRUE;
+	    if(AdminUtil.isNullOrEmpty(request.getParameter("testmode")))
+	    {
+		testMode = Boolean.FALSE;
+	    }
 	    EntityManagerFactory emfInstance = Persistence
 		    .createEntityManagerFactory("posts");
 	    entityManager = emfInstance.createEntityManager();
@@ -51,6 +56,7 @@ public class AdminServlet extends HttpServlet
 	    post.setTags(tags);
 	    post.setCategory(Integer.valueOf(category));
 	    post.setPostedAt(createdTime);
+	    post.setTestMode(testMode);
 
 	    entityManager.getTransaction().begin();
 

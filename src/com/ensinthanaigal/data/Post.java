@@ -19,6 +19,7 @@ public class Post {
 	private String content;
 	@Lob
 	private String tags;
+        private boolean testMode;
 	private Long postedAt;
 	private Long modifiedAt;
 
@@ -78,6 +79,16 @@ public class Post {
 
 	public void setCategory(int category) {
 		this.category = category;
+	}
+
+	public boolean isTestMode()
+	{
+	    return testMode;
+	}
+
+	public void setTestMode(boolean testMode)
+	{
+	    this.testMode = testMode;
 	}
 
 }

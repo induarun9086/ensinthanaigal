@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ensinthanaigal.server.util.AdminUtil;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
@@ -30,9 +31,22 @@ public class PageServlet extends HttpServlet
 	try
 	{
 	    String category = request.getParameter("category");
-	    TypedQuery < Object [ ] > q = entityManager.createQuery(
-		    "Select title,content from Post p where p.category = "
-			    + category,Object [ ].class);
+	    String postId = request.getParameter("postId");
+	    String test = request.getParameter("testmode");
+	    boolean testMode = Boolean.TRUE;
+	    if (AdminUtil.isNullOrEmpty(test))
+	    {
+		testMode = Boolean.FALSE;
+	    }
+
+	    TypedQuery < Object [ ] > q = entityManager
+		    .createQuery(
+			    "Select title,content,postID,category,tags,postedAt from Post p where p.category ="
+				    + category
+				    + " and p.postID = "
+				    + postId
+				    + " and p.testMode = " + testMode,
+			    Object [ ].class);
 	    List < Object [ ] > results = q.getResultList();
 
 	    JSONObject data = new JSONObject();
@@ -42,6 +56,10 @@ public class PageServlet extends HttpServlet
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("title",result [0]);
 		jsonObj.put("content",result [1]);
+		jsonObj.put("postId",result [2]);
+		jsonObj.put("catId",result [3]);
+		jsonObj.put("tags",result [4]);
+		jsonObj.put("postedAt",result [5]);
 		jsonArr.put(jsonObj);
 	    }
 	    data.put("data",jsonArr);

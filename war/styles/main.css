@@ -34,6 +34,11 @@ a {}
 .pop-post-list{border:2px solid black;padding:0.9%;margin-top:0.9%;border-radius:0% 0% 3% 3%;background:url('../imgs/header-bg.png'); box-shadow:1px 1px 3px #333333;}
 .new-content{border:2px solid black;padding:0.9%;margin-top:0.9%;border-radius:0% 0% 3% 3%;background:url('../imgs/header-bg.png'); box-shadow:1px 1px 3px #333333;}
 
+.postLink {font-family:Philosopher;font-size:99%;color:#000066;}
+.postLink:hover {cursor:pointer;font-size:105%;color:#0066cc;font-weight:bold;}
+.postList {position:fixed;top:12%;bottom:12%;right:0%;width:3%;border:2px solid black;border-right:0px;background:url('../imgs/header-bg.png'); box-shadow:0px 0px 9px #333333;border-radius:21% 0% 0% 21%;}
+.postList:hover{width:18%;}
+.postDiv{width:99%;}
 .content-frame{margin:3%;}
 .post-title{text-align:center;font-size:180%;margin-top:1.2%;font-family:Courgette}
 .post-body{margin:9%;margin-top:0.9%;margin-bottom:0.9%;padding:0.3%;font-family:combo;}

@@ -10,6 +10,7 @@ function submitAdminForm() {
 						  title = $form.find( 'textarea[name="title"]' ).val(),
 						  tags   = $form.find( 'textarea[name="tags"]' ).val(),
 						  content   = $form.find( 'textarea[name="content"]' ).val(),
+						  testmode   = $('#testmode:checked').val();
 						  url = $form.attr( 'action' );
 
 						/* Validate the form */
