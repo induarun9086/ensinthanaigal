@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ensinthanaigal.server.util.AdminUtil;
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
@@ -54,8 +55,8 @@ public class PageServlet extends HttpServlet
 	    for ( Object [ ] result : results )
 	    {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("title",result [0]);
-		jsonObj.put("content",result [1]);
+		jsonObj.put("title",((Text)result [0]).getValue());
+		jsonObj.put("content",((Text)result [1]).getValue());
 		jsonObj.put("postId",result [2]);
 		jsonObj.put("catId",result [3]);
 		jsonObj.put("tags",result [4]);
@@ -64,7 +65,6 @@ public class PageServlet extends HttpServlet
 	    }
 	    data.put("data",jsonArr);
 	    response.getWriter().write(data.toString());
-	    ;
 	}
 	catch ( Exception e )
 	{

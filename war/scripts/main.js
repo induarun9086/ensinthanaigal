@@ -2,6 +2,8 @@ var testMode = 1;
 var postListCount = 6;
 var bannerElem;
 var bannerRotator;
+var catNames = new Array("Home", "Travel", "Cooking", "Technology", "Entertainment");
+var monthNames = new Array("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC");
 
 function startUp()
 {
@@ -57,11 +59,11 @@ function getPage(catId, postId)
     }
     else if(catId == 3)
     {
-      $(".content-frame").load("entertainment/index.html", function() { startUpCat(catId); });
+      $(".content-frame").load("technology/index.html", function() { startUpCat(catId); });
     }
     else if(catId == 4)
     {
-      $(".content-frame").load("technology/index.html", function() { startUpCat(catId); });
+      $(".content-frame").load("entertainment/index.html", function() { startUpCat(catId); });
     }
 		else
 		{
@@ -82,12 +84,19 @@ function createPostList(jsonArr)
   var data = "";
 	var i = 0;
   
-	data = data + '<ul>';
-  for(i=0;i<params.data.length;i++)
-  {
-    data = data + '<li class="postLink" onclick="getPage(' + params.data[i].catId + ',' + params.data[i].postId + ')">' + params.data[i].title + '</li>';
+	if(params.data.length == 0)
+	{
+		data = data + "<br /><h3> No Posts Yet :( </h3><br />";
+	}
+	else
+	{
+		data = data + '<ul>';
+		for(i=0;i<params.data.length;i++)
+		{
+			data = data + '<li class="postLink" onclick="getPage(' + params.data[i].catId + ',' + params.data[i].postId + ')">' + params.data[i].title + '</li>';
+		}
+		data = data + '</ul>';
   }
-	data = data + '</ul>';
   
   return data;
 }
@@ -101,31 +110,38 @@ function createPost(jsonArr)
 	
   if(params.data.length != 0)
   {
+	  var date = new Date(params.data[0].postedAt);
+		data = data + '<div class="post-path">'  + '<span class="pathLink" onclick="getPage(0, 0)">Home</span>&nbsp;>>&nbsp;';
+    data = data + '<span class="pathLink" onclick="getPage(' + params.data[0].catId + ', 0)">' + catNames[params.data[0].catId] + '</span>&nbsp;>>&nbsp;';
+    data = data + '<span class="pathLink" onclick="getPage(' + params.data[0].catId +',' + params.data[0].postId +')">' + params.data[0].title + '</span></div>';
+    data = data + '<div class="post-data">';
     data = data + '<div class="post-title">' + params.data[0].title + '</div>';
-    data = data + '<div class="post-path">'  + params.data[0].title + '</div>';
-    data = data + '<div class="post-date">'  + params.data[0].title + '</div>';
-    data = data + '<div class="post-tags">'  + params.data[0].tags + '</div>';
-    data = data + '<div class="post-body">'  + params.data[0].postedAt + '</div>';
+    data = data + '<span class="post-date">';
+    data = data + '<span class="post-date-date">'  + date.getDate() + '</span><br />';
+    data = data + '<span class="post-date-month">'  + monthNames[date.getMonth()] + '</span><br />';
+    data = data + '<span class="post-date-year">'  + date.getFullYear() + '</span><br />';
+    data = data + '</span>';
+    data = data + '<span class="post-tags"> Tags&nbsp;:&nbsp;'  + params.data[0].tags + '</span>';
+    data = data + '<div class="post-body">'  + params.data[0].content + '</div>';
     data = data + '</div>';
+    data = data + '</div>';
+		
+		/*data = data + '<div class="postList">';
+		data = data + '<div class="progress"></div>';
+		data = data + '</div>';
+		
+		$.get( "posts", { category: params.data[0].catId, sortorder: 0, testmode: testMode }).done(function( data ) 
+		{
+			$(".postList").html(createPostList(data));
+		}); */
+		
+		data = data + '</div>';
   }
   else
   {
     data = data + '<div class="post-title"> OOPS! Someone made a boo-boo, bad developer! </div>';
+		data = data + '</div>';
   }
-	
-	data = data + '</div>';
-	data = data + '<div class="postList">';
-	data = data + '<div class="bubblingG">';
-	data = data + '<span id="bubblingG_1"></span>';
-	data = data + '<span id="bubblingG_2"></span>';
-	data = data + '<span id="bubblingG_3"></span>';
-	data = data + '</div>';
-	data = data + '</div>';
-	
-	$.get( "posts", { category: params.data[0].catId, sortorder: 0, testmode: testMode }).done(function( data ) 
-	{
-		$(".postList").html(createPostList(data));
-	});
   
   return data;
 }
@@ -150,12 +166,14 @@ function rotateBanners(elem, dir) {
   var active = $(elem+" img.active");
   if(dir == 0) {
   var next = active.next();
+	if (next.length == 0) 
+		next = $(elem+" img:first");
   }
   else {
   var next = active.prev();
+	if (next.length == 0) 
+		next = $(elem+" img:last");
   }
-  if (next.length == 0) 
-  next = $(elem+" img:first");
   active.removeClass("active").fadeOut(1000);
   next.addClass("active").fadeIn(1000);
 }
@@ -180,5 +198,6 @@ function prepareRotator(elem) {
 function startRotator(elem) {
   prepareRotator(elem);
   bannerElem = elem;
+	clearInterval(bannerRotator);
   bannerRotator = setInterval("rotateBanners('"+elem+"',0)", 6000);
 }

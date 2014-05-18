@@ -4,10 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/admin.js"></script>
+<link type="text/css" rel="stylesheet" href="styles/main.css">
+<link type="text/css" rel="stylesheet" href="styles/simpleLoader.css">
+<link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Arizonia" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Salsa" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nova+Square" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet" type="text/css">
 <title>Admin Page</title>
 </head>
 <body>
-	<form id="adminform" action="/adminaction" method="post">
+   <div class="content-preview" onclick="closePreview()"></div>
+	<form id="adminform" name="adminform" class="adminform" action="/adminaction" method="post">
 		<div>
 			<label>Category</label>
 			<div>
@@ -41,8 +50,9 @@
 			<input type="checkbox" name="testmode" checked="checked"> TestMode <br> 
 		</div>
 		<button name="post" type="submit" value="post"
-			onclick="submitAdminForm()">post</button>
-
+			onclick="submitAdminForm()">Post</button>
 	</form>
+	<button name="preview" 
+			onclick="createPreview()" style="margin:3%;margin-top:0px;">Preview</button>
 </body>
 </html>

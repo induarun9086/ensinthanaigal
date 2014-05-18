@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ensinthanaigal.server.util.AdminUtil;
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
@@ -76,7 +76,7 @@ public class PostServlet extends HttpServlet
 	    for ( Object [ ] result : results )
 	    {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("title",result [0]);
+		jsonObj.put("title",((Text)result [0]).getValue());
 		jsonObj.put("catId",result [1]);
 		jsonObj.put("postId",result [2]);
 		jsonArr.put(jsonObj);

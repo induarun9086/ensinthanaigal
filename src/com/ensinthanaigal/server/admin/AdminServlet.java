@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ensinthanaigal.data.Post;
 import com.ensinthanaigal.server.util.AdminUtil;
+import com.google.appengine.api.datastore.Text;
 
 public class AdminServlet extends HttpServlet
 {
@@ -51,8 +52,8 @@ public class AdminServlet extends HttpServlet
 	    long createdTime = cal.getTimeInMillis();
 
 	    Post post = new Post();
-	    post.setTitle(title);
-	    post.setContent(content);
+	    post.setTitle(new Text(title));
+	    post.setContent(new Text(content));
 	    post.setTags(tags);
 	    post.setCategory(Integer.valueOf(category));
 	    post.setPostedAt(createdTime);
