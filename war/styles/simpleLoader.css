@@ -1,0 +1,35 @@
+.progress {
+height:45px;
+width:45px;
+margin:12px auto;
+position:relative;
+-webkit-animation: rotation 1.5s infinite linear;
+-moz-animation: rotation 1.5s infinite linear;
+-o-animation: rotation 1.5s infinite linear;
+animation: rotation 1.5s infinite linear;
+border-left:12px solid rgba(0,69,69,.8);
+border-right:12px solid rgba(0,69,180,.8);
+border-bottom:12px solid rgba(0,180,69,.8);
+border-top:12px solid rgba(0,180,180,.8);
+border-radius:100%;
+}
+
+@-webkit-keyframes rotation {
+from {-webkit-transform: rotate(0deg);}
+to {-webkit-transform: rotate(359deg);}
+}
+
+@-moz-keyframes rotation {
+from {-moz-transform: rotate(0deg);}
+to {-moz-transform: rotate(359deg);}
+}
+
+@-o-keyframes rotation {
+from {-o-transform: rotate(0deg);}
+to {-o-transform: rotate(359deg);}
+}
+
+@keyframes rotation {
+from {transform: rotate(0deg);}
+to {transform: rotate(359deg);}
+}

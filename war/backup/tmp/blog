@@ -1,0 +1,78 @@
+Sometimes Junit's rules feature or parameterized unit tests will not be a great choice if want to run one test for n different tasks.Implementing Junit custom runner will solve the problem and is relatiely a straight forward approach.
+
+Write the test case once and execute it for a specifice set of different programming languages.Annotate the test case to with RunWith to use the customized Junit runner.Jnit will take the custom runner whenever your test is annotated with the @RunWith annotation.
+
+<div class="CodeBlock">
+import com.example.junit.languages; 
+@RunWith(Languages.class) 
+public class LanguagesTest{ 
+    @Test 
+    public void testLanguage(){ 
+        System.out.println("Language " + LanguageContainer.get() + " is easy to learn"); 
+    } 
+}
+</div>
+
+Language to be tested could be manipulated via a global class LanguageContainer:
+class LanguageContainer { 
+    private static String language; 
+
+    public static String set(String language) { 
+        String old = LanguageContainer.language; 
+        LanguageContainer.language = language; 
+        return old; 
+    } 
+    public static String get() { 
+        return language; 
+    } 
+}
+
+The simplest way to get a custom runner is to extend BlockJUnit4ClassRunner which is the default runner in Junit.And the best technique to extend standard JUnit behavior programmatically, is to inject your functionality in the Statement chain that the base class runner builds. 
+
+class LanguagesRunner extends BlockJUnit4ClassRunner {  
+    private final String language;
+    LanguagesRunner(String language, String testName,Class<?> klass) throws InitializationError {  
+        super(klass);  
+        this.language = language;  
+    }
+    @Override  
+    protected Statement methodBlock(final FrameworkMethod method) {  
+        return new Statement() {  
+            @Override  
+            public void evaluate() throws Throwable {  
+                String oldLanguage = LanguageContainer.set(language);  
+                try {  
+                    LanguagesRunner.super.methodBlock(method).evaluate();  
+                } finally {  
+                    LanguagesRunner.set(oldLanguage);  
+                }  
+            } };  
+    }  
+ 
+
+ protected String testName(FrameworkMethod method) {
+        return method.getName() + " for " + language;
+    } 
+}
+
+As this runner will execute the same tests multiple times,Languages should inherit from ParentRunner.Suite,which extends ParentRunner.The Languages class is quite simple. We extend the JUnit Suite class and pass our list of classes to the constructor. Junit's default Builder class will execute the constructor of any class which extends Suite.
+
+public class Languages extends Suite { 
+    private static final Iterable<Locale> languages = Arrays.asList("Java","Ruby","C","Scala"); 
+    
+     public Languages(Class<?> klass) throws InitializationError { 
+        super(klass, createRunners(klass)); 
+    } 
+
+    private static List<Runner> 
+            createRunners(Class<?> klass) throws InitializationError { 
+        List<Runner> runners = new ArrayList<Runner>(); 
+        int size = languages.size();
+        for(int i = 0; i < size; i ++){ 
+            runners.add(new LanguagesRunner(language, klass)); 
+        } 
+        return runners; 
+    } 
+}
+
+Now we are done with testing the languages. This test class should be executed for different languages.
