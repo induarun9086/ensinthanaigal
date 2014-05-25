@@ -1,3 +1,17 @@
+function adminStartup()
+{
+  loadPosts();
+  resizeMe();
+}
+
+function loadPosts()
+{
+    $.get("posts").done(function( data ) 
+    {
+      $(".adminPostList").html(createList(data));
+    });
+}
+
 function submitAdminForm() {
 	$("#adminform")
 			.submit(
@@ -78,6 +92,58 @@ function resizeMe()
   $("body").css("font-size", newFontSize);
 }
 
+function createList(posts)
+{
+  var params = jQuery.parseJSON(posts);
+  var data = "";
+	var i = 0;
+  
+	data = data + "<h3> Posts </h3>";
+	
+	if(params.data.length == 0)
+	{
+		data = data + "<br /><h4> No Posts Yet :( </h4><br />";
+	}
+	else
+	{
+		data = data + '<ul>';
+		for(i=0;i<params.data.length;i++)
+		{
+			data = data + '<li class="postLink" onclick="getPost(' + params.data[i].catId + ',' + params.data[i].postId + ',' + params.data[i].testmode +')">' + params.data[i].title + '</li>';
+		}
+		data = data + '</ul>';
+  }
+  
+  return data;
+}
+
+function getPost(catId, postId, testMode)
+{
+    $.get("getpage", { category: catId, postId: postId, testmode: testMode}).done(function( data ) 
+    {
+      updatePostForm(data);
+    });
+}
+
+function updatePostForm(data)
+{
+  var params = jQuery.parseJSON(data);
+	
+	$("#adminform").find( 'textarea[name="title"]' ).val(params.data[0].title);
+	$("#adminform").find( 'textarea[name="tags"]' ).val(params.data[0].tags);
+	$("#adminform").find( 'textarea[name="content"]' ).val(params.data[0].content);
+	$("#adminform").find( 'select[name="category"]').val(params.data[0].catId);
+	$("#adminform").find( 'input[name="postid"]').val(params.data[0].postId);
+	if(params.data[0].testMode == true)
+	{
+	  $("#adminform").find( 'input[name="testmode"]').prop('checked', true);
+	}
+	else
+	{
+	  $("#adminform").find( 'input[name="testmode"]').prop('checked', false);
+	}
+	$("#adminform").find( 'input:radio[name=action][id=edit]').prop('checked', true);
+}
 
 function createPreview()
 {
@@ -122,6 +188,25 @@ function closePreview()
 	$(".content-preview").css("bottom", "100%");
 }
 
+function addNewLine()
+{
+	$('#content').selection('insert', {
+			text: '<br />',
+			mode: 'before'
+	});
+}
+
+function addCodeBlock()
+{
+	$('#content').selection('insert', {
+			text: '<div class="Code">',
+			mode: 'before'
+	});
+	$('#content').selection('insert', {
+			text: '</div>',
+			mode: 'after'
+	});
+}
 
 function formatCodeBlock()
 {

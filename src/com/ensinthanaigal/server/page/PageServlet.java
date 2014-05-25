@@ -34,20 +34,19 @@ public class PageServlet extends HttpServlet
 	    String category = request.getParameter("category");
 	    String postId = request.getParameter("postId");
 	    String test = request.getParameter("testmode");
+	    String query = " Select title,content,postID,category,tags,postedAt,testMode from Post p where p.category ="
+		    + category
+		    + " and p.postID = "
+		    + postId;
 	    boolean testMode = Boolean.TRUE;
-	    if (AdminUtil.isNullOrEmpty(test))
+	    if (!(test == null))
 	    {
-		testMode = Boolean.FALSE;
+		testMode = Boolean.valueOf(test);
+		query += "and p.testMode = " + testMode;
 	    }
-
+    
 	    TypedQuery < Object [ ] > q = entityManager
-		    .createQuery(
-			    "Select title,content,postID,category,tags,postedAt from Post p where p.category ="
-				    + category
-				    + " and p.postID = "
-				    + postId
-				    + " and p.testMode = " + testMode,
-			    Object [ ].class);
+		    .createQuery(query, Object [ ].class);
 	    List < Object [ ] > results = q.getResultList();
 
 	    JSONObject data = new JSONObject();
@@ -61,6 +60,7 @@ public class PageServlet extends HttpServlet
 		jsonObj.put("catId",result [3]);
 		jsonObj.put("tags",result [4]);
 		jsonObj.put("postedAt",result [5]);
+		jsonObj.put("testMode",result [6]);
 		jsonArr.put(jsonObj);
 	    }
 	    data.put("data",jsonArr);
