@@ -38,6 +38,46 @@ function submitAdminForm() {
 					});
 }
 
+function submitLoginForm(){
+	$("#loginform")
+	  .submit(
+			function(event) {
+				
+				event.preventDefault();
+
+				var $form = $( this ),
+				userName = $form.find('input[name="username"]').val(),
+				passWord = CryptoJS.SHA256($form.find( 'input[name="password"]' ).val()).toString(CryptoJS.enc.Hex),
+				url = $form.attr( 'action' );
+				
+				$form.find( 'input[name="password"]' ).val(passWord);
+				
+				this.submit();
+			});
+ }
+ 
+function sendLogout()
+{
+	  $("#adminform").find( 'input[name="logout"]' ).val("logout");
+	  $("#adminform").submit();
+}
+ 
+function resizeMe()
+{
+  //Standard height, for which the body font size is correct
+  var preferredHeight = 720; 
+  var preferredWidth = 1366; 
+  var fontsize = 16;
+
+  var displayHeight = $(window).height();
+  var displayWidth = $(window).width();
+  var percentageH = ((1.1 * displayHeight) / preferredHeight);
+  var percentageW = ((1.1 * displayWidth) / preferredWidth);
+  var percentage  = ((percentageH > percentageW)?(percentageW):(percentageH))
+  var newFontSize = Math.floor(fontsize * percentage);
+  $("body").css("font-size", newFontSize);
+}
+
 
 function createPreview()
 {
@@ -63,13 +103,13 @@ function createPreview()
 	data = data + '<span class="post-date-year">'  + date.getFullYear() + '</span><br />';
 	data = data + '</span>';
   data = data + '<span class="post-tags"> Tags&nbsp;:&nbsp;'  + tags + '</span></div><br /><br />';
-  data = data + '<div class="post-body">'  + content + '</div>';
+  data = data + '<div class="post-body"><pre>'  + content + '</pre></div>';
   data = data + '</div>';
   data = data + '</div>';
 	data = data + '</div>';
 	
 	$(".content-preview").css("padding", "3%");
-	$(".content-preview").css("height", "100%");
+	$(".content-preview").css("bottom", "1%");
 	$(".content-preview").html(data);
 	
 	formatCodeBlock();
@@ -79,7 +119,7 @@ function closePreview()
 {
   $(".content-preview").html("");
   $(".content-preview").css("padding", "0px");
-	$(".content-preview").css("height", "0px");
+	$(".content-preview").css("bottom", "100%");
 }
 
 
