@@ -13,13 +13,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ensinthanaigal.data.Post;
 import com.ensinthanaigal.server.util.AdminUtil;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Text;
 
 public class AdminServlet extends HttpServlet
 {
-    
+
     private static final long serialVersionUID = 1L;
 
     private static final Logger log = Logger.getLogger("AdminServlet");
@@ -27,44 +34,86 @@ public class AdminServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+	int action = Integer.valueOf(request.getParameter("action"));
+	boolean isValidSession = AdminUtil.checkSession(request);
+	if ( ! isValidSession)
+	{
+	    response.getWriter().write("No tresspassing please !!!!");
+	    return;
+	}
 	EntityManager entityManager = null;
 	try
 	{
-	    String title = AdminUtil.checkForNullOrEmpty(
-		    request.getParameter("title"),"title");
-	    String content = AdminUtil.checkForNullOrEmpty(
-		    request.getParameter("content"),"content");
-	    String tags = AdminUtil.checkForNullOrEmpty(
-		    request.getParameter("tags"),"tags");
-	    String category = AdminUtil.checkForNullOrEmpty(
-		    request.getParameter("category"),"category");
-	    boolean testMode = Boolean.TRUE;
-	    if(AdminUtil.isNullOrEmpty(request.getParameter("testmode")))
+	    boolean logOut = Boolean.TRUE;
+	    if (AdminUtil.isNullOrEmpty(request.getParameter("logout")))
 	    {
-		testMode = Boolean.FALSE;
+		logOut = Boolean.FALSE;
 	    }
-	    EntityManagerFactory emfInstance = Persistence
-		    .createEntityManagerFactory("posts");
-	    entityManager = emfInstance.createEntityManager();
+	    if (logOut == Boolean.TRUE)
+	    {
+		HttpSession session = request.getSession();
+		session.setAttribute("admin_login",false);
+	    }
+	    else
+	    {
+		if (action == AdminUtil.CREATE || action == AdminUtil.UPDATE)
+		{
+		    String title = AdminUtil.checkForNullOrEmpty(
+			    request.getParameter("title"),"title");
+		    String content = AdminUtil.checkForNullOrEmpty(
+			    request.getParameter("content"),"content");
+		    String tags = AdminUtil.checkForNullOrEmpty(
+			    request.getParameter("tags"),"tags");
+		    String category = AdminUtil.checkForNullOrEmpty(
+			    request.getParameter("category"),"category");
+		    boolean testMode = Boolean.TRUE;
+		    if (AdminUtil.isNullOrEmpty(request
+			    .getParameter("testMode")))
+		    {
+			testMode = Boolean.FALSE;
+		    }
 
-	    Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-	    long createdTime = cal.getTimeInMillis();
+		    EntityManagerFactory emfInstance = Persistence
+			    .createEntityManagerFactory("posts");
+		    entityManager = emfInstance.createEntityManager();
 
-	    Post post = new Post();
-	    post.setTitle(title);
-	    post.setContent(content);
-	    post.setTags(tags);
-	    post.setCategory(Integer.valueOf(category));
-	    post.setPostedAt(createdTime);
-	    post.setTestMode(testMode);
+		    String postidStr = request.getParameter("postid");
 
-	    entityManager.getTransaction().begin();
+		    Post post = null;
 
-	    entityManager.persist(post);
+		    if (postidStr == null)
+		    {
+			Calendar cal = Calendar.getInstance(TimeZone
+				.getTimeZone("GMT"));
+			long createdTime = cal.getTimeInMillis();
 
-	    entityManager.getTransaction().commit();
+			post = new Post();
+			post.setPostedAt(createdTime);
+		    }
+		    else
+		    {
+			 post = entityManager.find(Post.class, Long.valueOf(postidStr));
+		    }
 
-	    log.log(Level.INFO,"Post inserted successfully");
+		    post.setTitle(new Text(title));
+		    post.setContent(new Text(content));
+		    post.setTags(tags);
+		    post.setCategory(Integer.valueOf(category));
+
+		    post.setTestMode(testMode);
+
+		    entityManager.getTransaction().begin();
+
+		    entityManager.persist(post);
+
+		    entityManager.getTransaction().commit();
+
+		    log.log(Level.INFO,"Post inserted successfully");
+		}
+
+	    }
+
+	    response.sendRedirect("/");
 	}
 	catch ( Exception e )
 	{

@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import com.google.appengine.api.datastore.Text;
+
 
 @Entity
 public class Post {
@@ -14,9 +16,9 @@ public class Post {
 	private Long postID;
 	private int category;
 	@Lob
-	private String title;
+	private Text title;
 	@Lob
-	private String content;
+	private Text content;
 	@Lob
 	private String tags;
         private boolean testMode;
@@ -33,19 +35,19 @@ public class Post {
 		this.postID = postID;
 	}
 
-	public String getTitle() {
+	public Text getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(Text title) {
 		this.title = title;
 	}
 
-	public String getContent() {
+	public Text getContent() {
 		return content;
 	}
 
-	public void setContent(String content) {
+	public void setContent(Text content) {
 		this.content = content;
 	}
 

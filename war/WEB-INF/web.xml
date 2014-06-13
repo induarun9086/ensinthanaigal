@@ -40,4 +40,14 @@
 		<servlet-class>com.ensinthanaigal.server.posts.PostServlet</servlet-class>
 	</servlet>
 
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/admin</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>com.ensinthanaigal.server.login.LoginServlet</servlet-class>
+	</servlet>
+
 </web-app>

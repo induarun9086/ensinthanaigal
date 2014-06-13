@@ -1,7 +1,14 @@
 package com.ensinthanaigal.server.util;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 public class AdminUtil
 {
+    public static final int CREATE = 0;
+    public static final int UPDATE = 1;
+    public static final int DELETE = 2;
+    
     public static String checkForNullOrEmpty(String stringToCheck, String dispStr) throws Exception
     {
 	if (stringToCheck == null || stringToCheck.isEmpty())
@@ -26,4 +33,14 @@ public class AdminUtil
 	return ! isNullOrEmpty(str);
     }
 
+    public static boolean checkSession(HttpServletRequest request)
+    {
+	HttpSession session = request.getSession();
+	Object adminLogin = session.getAttribute("admin_login");
+	if(adminLogin != null)
+	{
+	    return Boolean.valueOf((boolean)adminLogin);
+	}
+	return false;
+    }
 }

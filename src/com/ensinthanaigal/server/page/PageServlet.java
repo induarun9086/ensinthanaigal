@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ensinthanaigal.server.util.AdminUtil;
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
@@ -33,20 +34,19 @@ public class PageServlet extends HttpServlet
 	    String category = request.getParameter("category");
 	    String postId = request.getParameter("postId");
 	    String test = request.getParameter("testmode");
+	    String query = " Select title,content,postID,category,tags,postedAt,testMode from Post p where p.category ="
+		    + category
+		    + " and p.postID = "
+		    + postId;
 	    boolean testMode = Boolean.TRUE;
-	    if (AdminUtil.isNullOrEmpty(test))
+	    if (!(test == null))
 	    {
-		testMode = Boolean.FALSE;
+		testMode = Boolean.valueOf(test);
+		query += "and p.testMode = " + testMode;
 	    }
-
+    
 	    TypedQuery < Object [ ] > q = entityManager
-		    .createQuery(
-			    "Select title,content,postID,category,tags,postedAt from Post p where p.category ="
-				    + category
-				    + " and p.postID = "
-				    + postId
-				    + " and p.testMode = " + testMode,
-			    Object [ ].class);
+		    .createQuery(query, Object [ ].class);
 	    List < Object [ ] > results = q.getResultList();
 
 	    JSONObject data = new JSONObject();
@@ -54,17 +54,17 @@ public class PageServlet extends HttpServlet
 	    for ( Object [ ] result : results )
 	    {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("title",result [0]);
-		jsonObj.put("content",result [1]);
+		jsonObj.put("title",((Text)result [0]).getValue());
+		jsonObj.put("content",((Text)result [1]).getValue());
 		jsonObj.put("postId",result [2]);
 		jsonObj.put("catId",result [3]);
 		jsonObj.put("tags",result [4]);
 		jsonObj.put("postedAt",result [5]);
+		jsonObj.put("testMode",result [6]);
 		jsonArr.put(jsonObj);
 	    }
 	    data.put("data",jsonArr);
 	    response.getWriter().write(data.toString());
-	    ;
 	}
 	catch ( Exception e )
 	{

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ensinthanaigal.server.util.AdminUtil;
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
@@ -30,25 +30,30 @@ public class PostServlet extends HttpServlet
 	EntityManager entityManager = emfInstance.createEntityManager();
 	try
 	{
-	    String query = "Select title, category, postID from Post p";
+	    String query = "Select title, category, postID, testMode from Post p ";
+	    
+	    String category = request.getParameter("category");
 	    
 	    String testID = request.getParameter("testmode");
-	    boolean testMode = Boolean.TRUE;
-	    if (AdminUtil.isNullOrEmpty(testID))
-	    {
-		testMode = Boolean.FALSE;
-	    }
-
-	    String category = request.getParameter("category");
-	    if (AdminUtil.isNotNullOrEmpty(category))
-	    {
-		query = query + " where p.category = " + category;
-		query = query + " and p.testMode = " + testMode;
-	    }
-	    else
-	    {
-		query = query + " where p.testMode = " + testMode;
-	    }
+	    
+    	    boolean testMode = Boolean.TRUE;
+            if (!(testID == null))
+    	    {
+    	        testMode = Boolean.valueOf(testID);
+                query += "where p.testMode = " + testMode;
+                   
+    	        if (AdminUtil.isNotNullOrEmpty(category))
+    	        {
+    		   query = query + " and p.category = " + category;    	
+    	        }
+    	    }
+            else
+            {
+    	        if (AdminUtil.isNotNullOrEmpty(category))
+    	        {
+    		   query = query + "where p.category = " + category;    	
+    	        }
+            }
 
 	    String sortorder = request.getParameter("sortorder");
 	    if (AdminUtil.isNotNullOrEmpty(sortorder))
@@ -76,9 +81,10 @@ public class PostServlet extends HttpServlet
 	    for ( Object [ ] result : results )
 	    {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("title",result [0]);
+		jsonObj.put("title",((Text)result [0]).getValue());
 		jsonObj.put("catId",result [1]);
 		jsonObj.put("postId",result [2]);
+		jsonObj.put("testmode",result [3]);
 		jsonArr.put(jsonObj);
 	    }
 	    data.put("data",jsonArr);
