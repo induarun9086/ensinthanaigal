@@ -69,6 +69,10 @@ function getPage(catId, postId)
     {
       $(".content-frame").load("entertainment/index.html", function() { startUpCat(catId); });
     }
+    else if(catId == 5)
+    {
+      $(".content-frame").load("general/index.html", function() { startUpCat(catId); });
+    }
 		else
 		{
 		}

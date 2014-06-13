@@ -53,6 +53,7 @@ public class LoginServlet extends HttpServlet
 	    + "					<option value=\"2\">Cooking</option>"
 	    + "					<option value=\"3\">Technology</option>"
 	    + "					<option value=\"4\">Entertainment</option>"
+	    + "					<option value=\"5\">General</option>"
 	    + "				</select>"
 	    + "			        <input type=\"checkbox\" name=\"testmode\" checked=\"checked\"> TestMode <br> "
 	    + "			</div>"
