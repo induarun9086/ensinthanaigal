@@ -21,6 +21,8 @@ public class Post {
 	private Text content;
 	@Lob
 	private String tags;
+	@Lob
+	private String link;
         private boolean testMode;
 	private Long postedAt;
 	private Long modifiedAt;
@@ -57,6 +59,14 @@ public class Post {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+	
+	public Text getLink() {
+		return title;
+	}
+
+	public void setLink(Text title) {
+		this.title = title;
 	}
 
 	public Long getPostedAt() {
