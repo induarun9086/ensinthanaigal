@@ -27,7 +27,14 @@ function startUp()
     }
     else
     {
-      getPage(e.state["catId"], e.state["postId"], false);
+		  if(e.state["link"] == null)
+      {
+        getPage(e.state["catId"], e.state["postId"], false);
+		  }
+			else
+			{
+			  getPath(e.state["link"], false);
+			}
     }
   });
 }
@@ -66,12 +73,57 @@ function startUpCat(catId)
 
 function getPath(path, addHistory)
 {
-  addHistory = (typeof addHistory === "undefined") ? true : addHistory;
-  testMode = getParameterByName("testMode");
+  addHistory   = (typeof addHistory === "undefined") ? true : addHistory;
+  testMode     = getParameterByName("testMode");
 	
-	uriParts = path.split('/');
+	uriParts     = path.split('/');
+	var catId    = catLinks.indexOf(uriParts[0]);
+	var link     = catLinks[catId];
+	var stateObj = { catId: catId, link: path };
 	
-   alert(uriParts);
+  if(uriParts[1] == "")
+  {
+    if(catId == 0)
+    {
+      $(".content-frame").load("/home.html", function() { startUpCat(catId); });
+    }
+    else if(catId == 1)
+    {
+      $(".content-frame").load("/travel/index.html", function() { startUpCat(catId); });
+    }
+    else if(catId == 2)
+    {
+      $(".content-frame").load("/cooking/index.html", function() { startUpCat(catId); });
+    }
+    else if(catId == 3)
+    {
+      $(".content-frame").load("/technology/index.html", function() { startUpCat(catId); });
+    }
+    else if(catId == 4)
+    {
+      $(".content-frame").load("/entertainment/index.html", function() { startUpCat(catId); });
+    }
+    else if(catId == 5)
+    {
+      $(".content-frame").load("/general/index.html", function() { startUpCat(catId); });
+    }
+		else
+		{
+		}
+
+		if(addHistory == true)
+		{
+		  history.pushState(stateObj, catNames[catId], link);
+	  }
+  }
+  else
+  {
+    $.get( "/getpage", { category: catId, link: uriParts[1], testmode: testMode }).done(function( data ) 
+    {
+      $(".content-frame").html(createPost(data, stateObj, link, addHistory));
+			formatCodeBlock();
+    });
+  }
 }
 
 function getPage(catId, postId, addHistory)
