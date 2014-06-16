@@ -1,6 +1,5 @@
 package com.ensinthanaigal.data;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 import com.google.appengine.api.datastore.Text;
-
 
 @Entity
 public class Post {
@@ -22,8 +20,8 @@ public class Post {
 	@Lob
 	private String tags;
 	@Lob
-	private String link;
-        private boolean testMode;
+	private Text link;
+	private boolean testMode;
 	private Long postedAt;
 	private Long modifiedAt;
 
@@ -60,13 +58,13 @@ public class Post {
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
-	
+
 	public Text getLink() {
-		return title;
+		return link;
 	}
 
-	public void setLink(Text title) {
-		this.title = title;
+	public void setLink(Text link) {
+		this.link = link;
 	}
 
 	public Long getPostedAt() {
@@ -93,14 +91,12 @@ public class Post {
 		this.category = category;
 	}
 
-	public boolean isTestMode()
-	{
-	    return testMode;
+	public boolean isTestMode() {
+		return testMode;
 	}
 
-	public void setTestMode(boolean testMode)
-	{
-	    this.testMode = testMode;
+	public void setTestMode(boolean testMode) {
+		this.testMode = testMode;
 	}
 
 }

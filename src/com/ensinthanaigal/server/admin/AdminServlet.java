@@ -85,7 +85,7 @@ public class AdminServlet extends HttpServlet {
 					post.setContent(new Text(content));
 					post.setTags(tags);
 					post.setCategory(Integer.valueOf(category));
-					post.setLink(new Text(link.trim()));
+					post.setLink(new Text(link));
 					post.setTestMode(testMode);
 
 					entityManager.getTransaction().begin();
