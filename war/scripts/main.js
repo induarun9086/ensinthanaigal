@@ -81,7 +81,7 @@ function getPath(path, addHistory)
 	var link     = catLinks[catId];
 	var stateObj = { catId: catId, link: path };
 	
-  if(postId == 0)
+  if(uriParts[1] == "")
   {
     if(catId == 0)
     {
