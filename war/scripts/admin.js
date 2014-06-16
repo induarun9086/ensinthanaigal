@@ -22,6 +22,7 @@ function submitAdminForm() {
 						var $form = $( this ),
 						  category  = $form.find('select[name="category"]').val(),
 						  title = $form.find( 'textarea[name="title"]' ).val(),
+						  link = $form.find( 'textarea[name="link"]' ).val(),
 						  tags   = $form.find( 'textarea[name="tags"]' ).val(),
 						  content   = $form.find( 'textarea[name="content"]' ).val(),
 						  testmode   = $('#testmode:checked').val();
@@ -36,6 +37,10 @@ function submitAdminForm() {
 						else if ((title == "") || (title == " ")) 
 						{
 							alert("Title is required for the post");
+						}
+            else if ((link == "") || (link == " ")) 
+						{
+							alert("Link is required for the post");
 						}
 						else if ((tags == "") || (tags == " ")) 
 						{
@@ -130,6 +135,7 @@ function updatePostForm(data)
   var params = jQuery.parseJSON(data);
 	
 	$("#adminform").find( 'textarea[name="title"]' ).val(params.data[0].title);
+	$("#adminform").find( 'textarea[name="title"]' ).val(params.data[0].link);
 	$("#adminform").find( 'textarea[name="tags"]' ).val(params.data[0].tags);
 	$("#adminform").find( 'textarea[name="content"]' ).val(params.data[0].content);
 	$("#adminform").find( 'select[name="category"]').val(params.data[0].catId);
@@ -206,6 +212,10 @@ function addCodeBlock()
 			text: '</div>',
 			mode: 'after'
 	});
+}
+
+function addLink()
+{ 
 }
 
 function formatCodeBlock()
