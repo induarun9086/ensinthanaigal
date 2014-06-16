@@ -33,7 +33,7 @@ public class PageServlet extends HttpServlet
 	    String category = request.getParameter("category");
 	    String postId = request.getParameter("postId");
 	    String test = request.getParameter("testmode");
-	    String query = " Select title,content,postID,category,tags,postedAt,testMode from Post p where p.category ="
+	    String query = " Select title,content,postID,category,tags,postedAt,testMode,link from Post p where p.category ="
 		    + category
 		    + " and p.postID = "
 		    + postId;
@@ -60,6 +60,7 @@ public class PageServlet extends HttpServlet
 		jsonObj.put("tags",result [4]);
 		jsonObj.put("postedAt",result [5]);
 		jsonObj.put("testMode",result [6]);
+		jsonObj.put("link",((Text)result [6]).getValue());
 		jsonArr.put(jsonObj);
 	    }
 	    data.put("data",jsonArr);

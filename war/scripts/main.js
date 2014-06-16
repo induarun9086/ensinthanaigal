@@ -2,13 +2,34 @@ var testMode = 0;
 var postListCount = 6;
 var bannerElem;
 var bannerRotator;
-var catNames = new Array("Home", "Travel", "Cooking", "Technology", "Entertainment");
+var catNames   = new Array("Home", "Travel", "Cooking", "Technology", "Entertainment", "General");
 var monthNames = new Array("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC");
+var catLinks   = new Array("/", "/travel/", "/cooking/", "/tech/", "/ent/", "/gen/");
 
 function startUp()
 {
   resizeMe();
-  getPage(0, 0);
+	
+	if((window.location.pathname != null) && (window.location.pathname != "/"))
+  {
+    getPath(window.location.pathname, false);
+  }
+  else
+  {
+    getPage(0, 0, false);
+  }
+	
+	window.addEventListener("popstate", function(e) 
+  {
+    if(e.state == null)
+    {
+      getPage(0, 0, false);
+    }
+    else
+    {
+      getPage(e.state["catId"], e.state["postId"], false);
+    }
+  });
 }
 
 function startUpCat(catId)
@@ -19,69 +40,88 @@ function startUpCat(catId)
   {
     startRotator("#home-content-scroller");
 		
-		$.get( "posts", { sortorder: 1, limit:postListCount, testmode: testMode }).done(function( data ) 
+		$.get( "/posts", { sortorder: 1, limit:postListCount, testmode: testMode }).done(function( data ) 
     {
       $(".new-post-list").html(createPostList(data));
     });
 		
-		$.get( "posts", { sortorder: 0, limit:postListCount, testmode: testMode }).done(function( data ) 
+		$.get( "/posts", { sortorder: 0, limit:postListCount, testmode: testMode }).done(function( data ) 
     {
       $(".pop-post-list").html(createPostList(data));
     });
   }
 	else
 	{
-		$.get( "posts", { category: catId, sortorder: 1, limit:postListCount, testmode: testMode }).done(function( data ) 
+		$.get( "/posts", { category: catId, sortorder: 1, limit:postListCount, testmode: testMode }).done(function( data ) 
     {
       $(".new-post-list").html(createPostList(data));
     });
 		
-		$.get( "posts", { category: catId, sortorder: 2, limit:postListCount, testmode: testMode }).done(function( data ) 
+		$.get( "/posts", { category: catId, sortorder: 2, limit:postListCount, testmode: testMode }).done(function( data ) 
     {
       $(".pop-post-list").html(createPostList(data));
     });
 	}
 }
 
-function getPage(catId, postId)
+function getPath(path, addHistory)
 {
+  addHistory = (typeof addHistory === "undefined") ? true : addHistory;
   testMode = getParameterByName("testMode");
+	
+	uriParts = path.split('/');
+	
+   alert(uriParts);
+}
+
+function getPage(catId, postId, addHistory)
+{
+  addHistory = (typeof addHistory === "undefined") ? true : addHistory;
+  testMode = getParameterByName("testMode");
+	
+	var link = catLinks[catId];
+	var stateObj = { catId: catId, postId: postId };
 	
   if(postId == 0)
   {
     if(catId == 0)
     {
-      $(".content-frame").load("home.html", function() { startUpCat(catId); });
+      $(".content-frame").load("/home.html", function() { startUpCat(catId); });
     }
     else if(catId == 1)
     {
-      $(".content-frame").load("travel/index.html", function() { startUpCat(catId); });
+      $(".content-frame").load("/travel/index.html", function() { startUpCat(catId); });
     }
     else if(catId == 2)
     {
-      $(".content-frame").load("cooking/index.html", function() { startUpCat(catId); });
+      $(".content-frame").load("/cooking/index.html", function() { startUpCat(catId); });
     }
     else if(catId == 3)
     {
-      $(".content-frame").load("technology/index.html", function() { startUpCat(catId); });
+      $(".content-frame").load("/technology/index.html", function() { startUpCat(catId); });
     }
     else if(catId == 4)
     {
-      $(".content-frame").load("entertainment/index.html", function() { startUpCat(catId); });
+      $(".content-frame").load("/entertainment/index.html", function() { startUpCat(catId); });
     }
     else if(catId == 5)
     {
-      $(".content-frame").load("general/index.html", function() { startUpCat(catId); });
+      $(".content-frame").load("/general/index.html", function() { startUpCat(catId); });
     }
 		else
 		{
 		}
+
+		if(addHistory == true)
+		{
+		  history.pushState(stateObj, catNames[catId], link);
+	  }
   }
   else
   {
-    $.get( "getpage", { category: catId, postId: postId, testmode: testMode }).done(function( data ) 
+    $.get( "/getpage", { category: catId, postId: postId, testmode: testMode }).done(function( data ) 
     {
-      $(".content-frame").html(createPost(data));
+      $(".content-frame").html(createPost(data, stateObj, link, addHistory));
 			formatCodeBlock();
     });
   }
@@ -110,7 +150,7 @@ function createPostList(jsonArr)
   return data;
 }
 
-function createPost(jsonArr)
+function createPost(jsonArr, stateObj, link, addHistory)
 {
   var params = jQuery.parseJSON(jsonArr);
   var data = "";
@@ -145,11 +185,20 @@ function createPost(jsonArr)
 		}); */
 		
 		data = data + '</div>';
+		
+		link = link + params.data[0].title + '/';
   }
   else
   {
     data = data + '<div class="post-title"> OOPS! Someone made a boo-boo, bad developer! </div>';
 		data = data + '</div>';
+		
+		link = link + "error";
+  }
+	
+	if(addHistory == true)
+	{
+	  history.pushState(stateObj, "", link);
   }
   
   return data;
