@@ -17,11 +17,6 @@ import javax.servlet.http.HttpSession;
 
 import com.ensinthanaigal.data.Post;
 import com.ensinthanaigal.server.util.AdminUtil;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.Filter;
-import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Text;
 
 public class AdminServlet extends HttpServlet
