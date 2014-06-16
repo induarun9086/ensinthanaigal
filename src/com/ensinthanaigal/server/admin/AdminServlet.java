@@ -61,6 +61,8 @@ public class AdminServlet extends HttpServlet
 			    request.getParameter("tags"),"tags");
 		    String category = AdminUtil.checkForNullOrEmpty(
 			    request.getParameter("category"),"category");
+		    String link = AdminUtil.checkForNullOrEmpty(
+				    request.getParameter("link"),"link");
 		    boolean testMode = Boolean.TRUE;
 		    if (AdminUtil.isNullOrEmpty(request
 			    .getParameter("testMode")))
@@ -94,7 +96,7 @@ public class AdminServlet extends HttpServlet
 		    post.setContent(new Text(content));
 		    post.setTags(tags);
 		    post.setCategory(Integer.valueOf(category));
-
+		    post.setLink(new Text(link.trim()));
 		    post.setTestMode(testMode);
 
 		    entityManager.getTransaction().begin();

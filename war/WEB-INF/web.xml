@@ -48,5 +48,15 @@
 		<servlet-name>loginServlet</servlet-name>
 		<servlet-class>com.ensinthanaigal.server.login.LoginServlet</servlet-class>
 	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>defaultServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>defaultServlet</servlet-name>
+		<servlet-class>com.ensinthanaigal.server.admin.DefaultServlet</servlet-class>
+	</servlet>
 
 </web-app>
