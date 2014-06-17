@@ -238,7 +238,7 @@ function createPost(jsonArr, stateObj, link, addHistory)
 		
 		data = data + '</div>';
 		
-		link = link + params.data[0].title + '/';
+		link = link + params.data[0].link + '/';
   }
   else
   {
