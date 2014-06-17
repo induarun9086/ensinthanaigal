@@ -38,7 +38,7 @@ public class PageServlet extends HttpServlet {
 			if (AdminUtil.isNotNullOrEmpty(postId)) {
 				query = query + " and p.postID = " + postId;
 			} else if (AdminUtil.isNotNullOrEmpty(link)) {
-				query = query + " and p.link = " + link;
+				query = query + " and p.link = '" + link + "'";
 			}
 			boolean testMode = Boolean.TRUE;
 			if (!(test == null)) {
