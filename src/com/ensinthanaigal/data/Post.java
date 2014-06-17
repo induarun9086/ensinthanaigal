@@ -1,5 +1,6 @@
 package com.ensinthanaigal.data;
 
+import javax.jdo.annotations.PrimaryKey;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,7 @@ import com.google.appengine.api.datastore.Text;
 
 @Entity
 public class Post {
-
+	@PrimaryKey
 	private Long postID;
 	private int category;
 	@Lob
@@ -20,7 +21,7 @@ public class Post {
 	@Lob
 	private String tags;
 	@Lob
-	private Text link;
+	private String link;
 	private boolean testMode;
 	private Long postedAt;
 	private Long modifiedAt;
@@ -59,11 +60,11 @@ public class Post {
 		this.tags = tags;
 	}
 
-	public Text getLink() {
+	public String getLink() {
 		return link;
 	}
 
-	public void setLink(Text link) {
+	public void setLink(String link) {
 		this.link = link;
 	}
 
