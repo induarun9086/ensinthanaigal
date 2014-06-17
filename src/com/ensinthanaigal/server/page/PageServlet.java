@@ -61,7 +61,13 @@ public class PageServlet extends HttpServlet {
 				jsonObj.put("tags", result[4]);
 				jsonObj.put("postedAt", result[5]);
 				jsonObj.put("testMode", result[6]);
-				jsonObj.put("link", ((Text) result[7]).getValue());
+				Object linkStr = result[7];
+				if (linkStr != null) {
+					linkStr = ((Text) result[7]).getValue();
+				} else {
+					linkStr = "";
+				}
+				jsonObj.put("link", linkStr);
 				jsonArr.put(jsonObj);
 			}
 			data.put("data", jsonArr);
