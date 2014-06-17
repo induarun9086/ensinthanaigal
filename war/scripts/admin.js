@@ -135,7 +135,7 @@ function updatePostForm(data)
   var params = jQuery.parseJSON(data);
 	
 	$("#adminform").find( 'textarea[name="title"]' ).val(params.data[0].title);
-	$("#adminform").find( 'textarea[name="title"]' ).val(params.data[0].link);
+	$("#adminform").find( 'textarea[name="link"]' ).val(params.data[0].link);
 	$("#adminform").find( 'textarea[name="tags"]' ).val(params.data[0].tags);
 	$("#adminform").find( 'textarea[name="content"]' ).val(params.data[0].content);
 	$("#adminform").find( 'select[name="category"]').val(params.data[0].catId);
