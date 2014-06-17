@@ -55,10 +55,11 @@ public class AdminServlet extends HttpServlet {
 							request.getParameter("category"), "category");
 					String link = AdminUtil.checkForNullOrEmpty(
 							request.getParameter("link"), "link");
-					boolean testMode = Boolean.TRUE;
-					if (AdminUtil.isNullOrEmpty(request
-							.getParameter("testMode"))) {
-						testMode = Boolean.FALSE;
+					boolean testMode = Boolean.FALSE;
+					String testModeStr = request.getParameter("testMode");
+					if (AdminUtil.isNotNullOrEmpty(testModeStr)
+							&& testModeStr.equals("on")) {
+						testMode = Boolean.TRUE;
 					}
 
 					EntityManagerFactory emfInstance = Persistence
