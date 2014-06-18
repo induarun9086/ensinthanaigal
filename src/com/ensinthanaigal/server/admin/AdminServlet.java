@@ -56,7 +56,7 @@ public class AdminServlet extends HttpServlet {
 					String link = AdminUtil.checkForNullOrEmpty(
 							request.getParameter("link"), "link");
 					boolean testMode = Boolean.FALSE;
-					String testModeStr = request.getParameter("testMode");
+					String testModeStr = request.getParameter("testmode");
 					if (AdminUtil.isNotNullOrEmpty(testModeStr)
 							&& testModeStr.equals("on")) {
 						testMode = Boolean.TRUE;
