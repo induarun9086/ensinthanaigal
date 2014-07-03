@@ -216,6 +216,30 @@ function addCodeBlock()
 
 function addLink()
 { 
+  var linkUrl = $('#adminform').find('select[name="editIp"]').val();
+  
+  $('#content').selection('insert', {
+			text: '<a class="inTextLink" href="' + linkUrl + '">',
+			mode: 'before'
+	});
+	$('#content').selection('insert', {
+			text: '</a>',
+			mode: 'after'
+	});
+}
+
+function addImage()
+{
+  var linkUrl = $('#adminform').find('select[name="editIp"]').val();
+  
+  $('#content').selection('insert', {
+			text: '<img class="inTextImg" src="' + linkUrl + '" alt="';
+			mode: 'before'
+	});
+  $('#content').selection('insert', {
+			text: '" />',
+			mode: 'after'
+	});
 }
 
 function formatCodeBlock()
