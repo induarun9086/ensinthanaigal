@@ -1,9 +1,9 @@
 package com.ensinthanaigal.server.util;
 
 public enum Category {
-	
 
-	TRAVEL(1, "Travel"), COOKING(2, "Cooking"), TECHNOLOGY(3, "Technology"), ENTERTAINMENT(4,"Entertainment");
+	TRAVEL(1, "travel"), COOKING(2, "cooking"), TECHNOLOGY(3, "tech"), ENTERTAINMENT(
+			4, "entertainment");
 
 	private int value;
 	private String label;
@@ -29,12 +29,11 @@ public enum Category {
 		Category[] catTypeArr = Category.values();
 		for (int i = 0; i < catTypeArr.length; i++) {
 			Category catType = catTypeArr[i];
-			if (catType.label.equalsIgnoreCase( label)) {
+			if (catType.label.equalsIgnoreCase(label)) {
 				return catType.value;
 			}
 		}
 		return 0;
 	}
-
 
 }

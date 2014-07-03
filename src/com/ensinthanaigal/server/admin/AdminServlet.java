@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import com.ensinthanaigal.data.Post;
 import com.ensinthanaigal.server.util.AdminUtil;
+import com.ensinthanaigal.server.util.Category;
 import com.google.appengine.api.datastore.Text;
 
 public class AdminServlet extends HttpServlet {
@@ -96,6 +97,18 @@ public class AdminServlet extends HttpServlet {
 					entityManager.getTransaction().commit();
 
 					log.log(Level.INFO, "Post inserted successfully");
+
+					String postedUrl = "http://ensinthanaigal.appspot.com/"
+							+ Category.getLabel(Integer.valueOf(category))
+							+ "/" + title;
+					boolean isDevelopmentMode = Boolean.valueOf(System
+							.getProperty("developmentmode"));
+					if (isDevelopmentMode == Boolean.FALSE) {
+						if (!post.isTestMode() && action == AdminUtil.CREATE) {
+							AdminUtil.postTweet(postedUrl);
+						}
+					}
+
 				}
 
 			}

@@ -1,5 +1,8 @@
 package com.ensinthanaigal.server.admin;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -85,7 +88,23 @@ public class DefaultServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().write(INDEX);
+		StringBuilder contentBuilder = new StringBuilder();
+		try {
+			File file = new File("/index.html");
+			if (!file.exists()) {
+				System.out.println("File exists");
+			}
+			BufferedReader in = new BufferedReader(
+					new FileReader("/index.html"));
+			String str;
+			while ((str = in.readLine()) != null) {
+				contentBuilder.append(str);
+			}
+			in.close();
+		} catch (IOException e) {
+		}
+		String content = contentBuilder.toString();
+		response.getWriter().write(content);
 	}
 
 }

@@ -214,9 +214,9 @@ function addCodeBlock()
 	});
 }
 
-function addLink()
+function addLinkTag()
 { 
-  var linkUrl = $('#adminform').find('select[name="editIp"]').val();
+  var linkUrl = $('#adminform').find('input[name="editIp"]').val();
   
   $('#content').selection('insert', {
 			text: '<a class="inTextLink" href="' + linkUrl + '">',
@@ -228,12 +228,12 @@ function addLink()
 	});
 }
 
-function addImage()
+function addImageTag()
 {
-  var linkUrl = $('#adminform').find('select[name="editIp"]').val();
+  var linkUrl = $('#adminform').find('input[name="editIp"]').val();
   
   $('#content').selection('insert', {
-			text: '<img class="inTextImg" src="' + linkUrl + '" alt="';
+			text: '<img class="inTextImg" src="' + linkUrl + '" alt="',
 			mode: 'before'
 	});
   $('#content').selection('insert', {
