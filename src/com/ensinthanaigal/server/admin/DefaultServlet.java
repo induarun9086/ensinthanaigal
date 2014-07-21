@@ -1,14 +1,14 @@
 package com.ensinthanaigal.server.admin;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ensinthanaigal.server.util.AdminUtil;
 
 public class DefaultServlet extends HttpServlet {
 
@@ -88,23 +88,13 @@ public class DefaultServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		StringBuilder contentBuilder = new StringBuilder();
 		try {
-			File file = new File("/index.html");
-			if (!file.exists()) {
-				System.out.println("File exists");
-			}
-			BufferedReader in = new BufferedReader(
-					new FileReader("/index.html"));
-			String str;
-			while ((str = in.readLine()) != null) {
-				contentBuilder.append(str);
-			}
-			in.close();
-		} catch (IOException e) {
+			ServletContext context = getServletContext();
+			AdminUtil.witeHTMLToResponse(context, "/WEB-INF/index.html",
+					response);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		String content = contentBuilder.toString();
-		response.getWriter().write(content);
 	}
 
 }
