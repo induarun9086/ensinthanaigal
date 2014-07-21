@@ -58,5 +58,5 @@ h3{text-align:center;font-size:120%;font-family:Courgette;}
 .loginDiv{position:fixed;top:15%;left:33%;right:33%;font-family:'Courgette';border:1px solid grey;text-align:center;padding:0px;padding-bottom:3%;border-radius:12%;overflow:hidden;background:url('../imgs/icon-bg.png');}
 .adminPostList{float:right;width:33%;margin:3%;margin-top:0px;}
 .inTextLink{color:#3333cc;}
-.inTextLink:hover{color:#cccc33}
+.inTextLink:hover{color:#cccc33;}
 .inTextImg{width:30%;border:1px solid black;border-radius:3%;overflow:hidden;}
