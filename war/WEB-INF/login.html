@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC"-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script
+	src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+<script type="text/javascript" src="scripts/admin.js"></script>
+<link type="text/css" rel="stylesheet" href="styles/main.css">
+<link type="text/css" rel="stylesheet" href="styles/simpleLoader.css">
+<link href="https://fonts.googleapis.com/css?family=Courgette"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Arizonia"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Salsa"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nova+Square"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Fredericka+the+Great"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Handlee"
+	rel="stylesheet" type="text/css">
+
+<title>Admin Page</title>
+</head>
+<body onload="resizeMe()" onresize="resizeMe()">
+	<div class="loginDiv">
+		<div class="loginHeader">Ensinthanaigal Admin Login</div>
+		<form id="loginform" name="loginform" class="loginform"
+			action="/admin" method="post">
+			<div>
+				<label>UserName</label>
+				<div>
+					<input type="text" name="username" value="" />
+				</div>
+			</div>
+			<div>
+				<label>Password</label>
+				<div>
+					<input type="password" name="password" value="" />
+				</div>
+			</div>
+
+			<br />
+			<button name="login" type="submit" class="loginBtn" value="login"
+				onclick="submitLoginForm()">Login</button>
+		</form>
+	</div>
+</body>
+</html>
+

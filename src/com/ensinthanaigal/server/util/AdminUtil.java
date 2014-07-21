@@ -1,6 +1,13 @@
 package com.ensinthanaigal.server.util;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import twitter4j.Status;
@@ -48,16 +55,17 @@ public class AdminUtil {
 		String latestStatus = "A new posted has been added to the blog : "
 				+ postedUrl;
 
+		Map<String, String> credentialsMap = DataUtil.getCredentials("twitter");
 		Twitter twitter = new TwitterFactory().getInstance();
 		// api key and api secret
-		twitter.setOAuthConsumer("46dxjDFXJ657rLVPLAZCeXVP1",
-				"bBZVY2g7GyTOqBd0xH89JmsawumSZ8kqsgcmiFDxtf7pDz5KIh");
+		twitter.setOAuthConsumer(credentialsMap.get("APIkey"),
+				credentialsMap.get("APIsecret"));
 
 		try {
-			// RequestToken requestToken = twitter.getOAuthRequestToken();
+
 			AccessToken accessToken = new AccessToken(
-					"151354520-ROjqoEgZRERdgbymMDYXYPCKJI2Ml8SK8csB5416",
-					"OzUO8zWvOYWpnrBfNkOVItdcllzKSiMg42X9GeY6fjRFJ");
+					credentialsMap.get("Accesstoken"),
+					credentialsMap.get("Accesstokensecret"));
 			twitter.setOAuthAccessToken(accessToken);
 			Status status = twitter.updateStatus(latestStatus);
 			System.out.println("Successfully updated the status to ["
@@ -65,8 +73,31 @@ public class AdminUtil {
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("status has not bee updated due to "
+			System.out.println("status has not been updated due to "
 					+ e.getMessage());
+		}
+
+	}
+
+	public static void witeHTMLToResponse(ServletContext context,
+			String fileName, HttpServletResponse response) throws Exception {
+		InputStream is = context.getResourceAsStream(fileName);
+		OutputStream output = response.getOutputStream();
+		byte[] buffer = new byte[is.available()];
+
+		try {
+			for (int length = 0; (length = is.read(buffer)) > 0;) {
+				output.write(buffer, 0, length);
+			}
+		} finally {
+			try {
+				output.close();
+			} catch (IOException ignore) {
+			}
+			try {
+				is.close();
+			} catch (IOException ignore) {
+			}
 		}
 
 	}
