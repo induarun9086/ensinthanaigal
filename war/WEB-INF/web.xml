@@ -59,10 +59,6 @@
 		<servlet-class>com.ensinthanaigal.server.admin.DefaultServlet</servlet-class>
 	</servlet>
 	
-	<jsp-config>
-	    <jsp-property-group>
-	            <url-pattern>/dbUpdate.jsp</url-pattern>
-	    </jsp-property-group>
-	</jsp-config>
+	<jsp-file>/dbUpdate.jsp</jsp-file>
 
 </web-app>
