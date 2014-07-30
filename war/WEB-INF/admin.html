@@ -1,95 +1,91 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script type="text/javascript" src="scripts/jquery.js"></script>
-<script type="text/javascript" src="scripts/jquery.selection.js"></script>
-<script type="text/javascript" src="scripts/admin.js"></script>
-<link type="text/css" rel="stylesheet" href="styles/main.css">
-<link type="text/css" rel="stylesheet" href="styles/simpleLoader.css">
-<link href="https://fonts.googleapis.com/css?family=Courgette"
-	rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Arizonia"
-	rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Salsa"
-	rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Nova+Square"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Fredericka+the+Great"
-	rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro"
-	rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Handlee"
-	rel="stylesheet" type="text/css">
-<title>Admin Page</title>
-</head>
-<body onload="adminStartup()" onresize="resizeMe()">
-	<div class="content-preview" onclick="closePreview()"></div>
-	<form id="adminform" name="adminform" class="adminform"
-		action="/adminaction" method="post">
-		<div>
-			<div class="formLabel">Actions</div>
-			<input type="radio" name="action" id="add" value=0 checked="checked" />Add
-			<input type="radio" name="action" id="edit" value=1 />Edit <input
-				type="radio" name="action" id="delete" value=2 />Delete
-		</div>
-		<div>
-			<div class="formLabel">Category</div>
-			<div>
-				<select name="category">
-					<option value="1">Travel</option>
-					<option value="2">Cooking</option>
-					<option value="3">Technology</option>
-					<option value="4">Entertainment</option>
-					<option value="5">General</option>
-				</select> <input type="checkbox" name="testmode" checked="checked">
-				TestMode <br>
-			</div>
-		</div>
-		<div>
-			<div class="formLabel">Title</div>
-			<div>
-				<textarea name="title" rows="2" cols="50"></textarea>
-			</div>
-		</div>
-		<div class="formLabel">Link</div>
-		<div>
-			<textarea name="link" rows="2" cols="50"></textarea>
-		</div>
-		</div>
-		<div>
-			<div class="formLabel">Tags</div>
-			<div>
-				<textarea name="tags" rows="2" cols="50"></textarea>
-			</div>
-		</div>
-		<div>
-			<div class="formLabel">Content</div>
-			<input type="text" name="editIp" width="30">
-			<button type="button" name="newline" onclick="addNewLine()">Newline</button>
-			<button type="button" name="addCode" onclick="addCodeBlock()">AddCode</button>
-			<button type="button" name="addLink" onclick="addLinkTag()">AddLink</button>
-			<button type="button" name="addImage" onclick="addImageTag()">AddImage</button>
-			<div>
-				<textarea name="content" id="content" rows="20" cols="81"></textarea>
-			</div>
-		</div>
-		<div>
-			<input type="hidden" name="postid" value="" />
-		</div>
-		<div>
-			<input type="hidden" name="logout" value="" />
-		</div>
-		<button name="post" type="submit" value="post"
-			onclick="submitAdminForm()">Post</button>
-		<button type="button" name="preview" onclick="createPreview()"
-			style="margin: 3%; margin-top: 0px;">Preview</button>
-		<button type="button" name="logout" onclick="sendLogout()"
-			style="margin: 3%; margin-top: 0px;">Logout</button>
-	</form>
-	<div class="adminPostList">
-		<div class="progress"></div>
-	</div>
-</body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/jquery.selection.js"></script>
+    <script type="text/javascript" src="scripts/admin.js"></script>
+    <script type="text/javascript" src="scripts/showImage.js"></script>
+    
+    <link type="text/css" rel="stylesheet" href="styles/main.css">
+    <link type="text/css" rel="stylesheet" href="styles/simpleLoader.css">
+    <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Arizonia" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Salsa" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nova+Square" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet" type="text/css">
+    
+    <title>Admin Page</title>
+  </head>
+  <body onload="adminStartup()" onresize="resizeMe()">
+    <div class="content-preview" onclick="closePreview()"></div>
+    <form id="adminform" name="adminform" class="adminform"
+      action="/adminaction" method="post">
+      <div>
+        <div class="formLabel">Actions</div>
+        <input type="radio" name="action" id="add" value=0 checked="checked" />Add
+        <input type="radio" name="action" id="edit" value=1 />Edit <input
+          type="radio" name="action" id="delete" value=2 />Delete
+      </div>
+      <div>
+        <div class="formLabel">Category</div>
+        <div>
+          <select name="category">
+            <option value="1">Travel</option>
+            <option value="2">Cooking</option>
+            <option value="3">Technology</option>
+            <option value="4">Entertainment</option>
+            <option value="5">General</option>
+          </select> <input type="checkbox" name="testmode" checked="checked">
+          TestMode <br>
+        </div>
+      </div>
+      <div>
+        <div class="formLabel">Title</div>
+        <div>
+          <textarea name="title" rows="2" cols="50"></textarea>
+        </div>
+      </div>
+      <div class="formLabel">Link</div>
+      <div>
+        <textarea name="link" rows="2" cols="50"></textarea>
+      </div>
+      </div>
+      <div>
+        <div class="formLabel">Tags</div>
+        <div>
+          <textarea name="tags" rows="2" cols="50"></textarea>
+        </div>
+      </div>
+      <div>
+        <div class="formLabel">Content</div><br />
+        <input type="text" name="linkUrl" style="width:33%;"> --- Anchor Link <br />
+        <input type="text" name="imgUrl" style="width:33%;">  --- Image URL <br />
+        <input type="text" name="thumbUrl" style="width:33%;"> --- Thumb URL <br />
+        <br />
+        <button type="button" name="newline" onclick="addNewLine()">Newline</button>
+        <button type="button" name="addCode" onclick="addCodeBlock()">AddCode</button>
+        <button type="button" name="addLink" onclick="addLinkTag()">AddLink</button>
+        <button type="button" name="addImage" onclick="addImageTag()">AddImage</button>
+        <div><br />
+          <textarea name="content" id="content" rows="20" cols="81"></textarea>
+        </div>
+      </div>
+      <div>
+        <input type="hidden" name="postid" value="" />
+      </div>
+      <div>
+        <input type="hidden" name="logout" value="" />
+      </div>
+      <button name="post" type="submit" value="post" onclick="submitAdminForm()">Post</button>
+      <button type="button" name="preview" onclick="createPreview()" style="margin: 3%; margin-top: 0px;">Preview</button>
+      <button type="button" name="logout" onclick="sendLogout()" style="margin: 3%; margin-top: 0px;">Logout</button>
+    </form>
+    <div class="adminPostList">
+      <div class="progress"></div>
+    </div>
+  </body>
 </html>
