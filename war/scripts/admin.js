@@ -216,7 +216,7 @@ function addCodeBlock()
 
 function addLinkTag()
 { 
-  var linkUrl = $('#adminform').find('input[name="editIp"]').val();
+  var linkUrl = $('#adminform').find('input[name="linkUrl"]').val();
   
   $('#content').selection('insert', {
 			text: '<a class="inTextLink" href="' + linkUrl + '">',
@@ -230,14 +230,15 @@ function addLinkTag()
 
 function addImageTag()
 {
-  var linkUrl = $('#adminform').find('input[name="editIp"]').val();
+  var imgUrl   = $('#adminform').find('input[name="imgUrl"]').val();
+  var thumbUrl = $('#adminform').find('input[name="thumbUrl"]').val();
   
   $('#content').selection('insert', {
-			text: '<img class="inTextImg" src="' + linkUrl + '" alt="',
+			text: '<div class="polImgDiv polImgLoc1 polImgRot1" name=""><img class="polImage" onClick="ShowImage(\'' + imgUrl + '\', \'Image\')" src="' + thumbUrl + '" alt="',
 			mode: 'before'
 	});
   $('#content').selection('insert', {
-			text: '" />',
+			text: '" /></div>',
 			mode: 'after'
 	});
 }
