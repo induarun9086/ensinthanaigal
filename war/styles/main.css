@@ -1,6 +1,8 @@
-body {border:0px; margin:0px; padding:0px; font-size:15px; background:url('../imgs/bg.png');font-family:Handlee}
+body {border:0px; margin:0px; padding:0px; font-size:12px; background:url('../imgs/bg.png');font-family:Handlee}
 a {}
 h3{text-align:center;font-size:120%;font-family:Courgette;}
+ul{text-indent:0px;}
+ol{text-indent:0px;}
 .home-bar {position:fixed; top:0px; left:0%; right: 0px; width:15%; padding:0px; padding-right:0.3%;text-align:right; border:0px; border-right:2px solid black; border-radius:0% 9% 9% 0%;background:url('../imgs/icon-bg.png');box-shadow:0px 0px 9px #000000 inset;z-index:99999;}
 .home-bar:hover{cursor:pointer;}
 .home-logo {width:81%;padding-top:3%;}
