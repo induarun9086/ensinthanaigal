@@ -238,7 +238,7 @@ function addImageTag()
   var polImgRot  = $('#adminform').find('input[name="polImgRot"]').val();
   
   $('#content').selection('insert', {
-			text: '<div class="polImgDiv polImgLoc' + polImgLoc + ' polImgRot' + polImgRot' +" name="' + imgName + '"><img class="polImage" onClick="ShowImage(\'' + imgUrl + '\', \'Image\')" src="' + thumbUrl + '" alt="',
+			text: '<div class="polImgDiv polImgLoc' + polImgLoc + ' polImgRot' + polImgRot + '" name="' + imgName + '"><img class="polImage" onClick="ShowImage(\'' + imgUrl + '\', \'Image\')" src="' + thumbUrl + '" alt="',
 			mode: 'before'
 	});
   $('#content').selection('insert', {
