@@ -232,9 +232,13 @@ function addImageTag()
 {
   var imgUrl   = $('#adminform').find('input[name="imgUrl"]').val();
   var thumbUrl = $('#adminform').find('input[name="thumbUrl"]').val();
+  var imgName  = $('#adminform').find('input[name="imgName"]').val();
+  
+  var polImgLoc  = $('#adminform').find('input[name="polImgLoc"]').val();
+  var polImgRot  = $('#adminform').find('input[name="polImgRot"]').val();
   
   $('#content').selection('insert', {
-			text: '<div class="polImgDiv polImgLoc1 polImgRot1" name=""><img class="polImage" onClick="ShowImage(\'' + imgUrl + '\', \'Image\')" src="' + thumbUrl + '" alt="',
+			text: '<div class="polImgDiv polImgLoc' + polImgLoc + ' polImgRot' + polImgRot' +" name="' + imgName + '"><img class="polImage" onClick="ShowImage(\'' + imgUrl + '\', \'Image\')" src="' + thumbUrl + '" alt="',
 			mode: 'before'
 	});
   $('#content').selection('insert', {
