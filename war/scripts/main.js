@@ -261,12 +261,12 @@ function resizeMe()
   //Standard height, for which the body font size is correct
   var preferredHeight = 720; 
   var preferredWidth = 1366; 
-  var fontsize = 16;
+  var fontsize = 12;
 
   var displayHeight = $(window).height();
   var displayWidth = $(window).width();
-  var percentageH = ((1.1 * displayHeight) / preferredHeight);
-  var percentageW = ((1.1 * displayWidth) / preferredWidth);
+  var percentageH = ((1.2 * displayHeight) / preferredHeight);
+  var percentageW = ((1.2 * displayWidth) / preferredWidth);
   var percentage  = ((percentageH > percentageW)?(percentageW):(percentageH))
   var newFontSize = Math.floor(fontsize * percentage);
   $("body").css("font-size", newFontSize);
