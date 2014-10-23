@@ -1,4 +1,14 @@
+
 <!-- Indices written at Mon, 21 Jul 2014 14:25:18 CEST -->
 
-<datastore-indexes/>
+<datastore-indexes />
+
+<!-- Used 24 times in query history -->
+<datastore-index kind="Post" ancestor="false" source="auto">
+	<property name="category" direction="asc" />
+	<property name="testMode" direction="asc" />
+	<property name="postedAt" direction="desc" />
+</datastore-index>
+
+</datastore-indexes>
 
