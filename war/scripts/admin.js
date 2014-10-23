@@ -135,7 +135,7 @@ function updatePostForm(data)
   var params = jQuery.parseJSON(data);
 	
 	$("#adminform").find( 'textarea[name="title"]' ).val(params.data[0].title);
-	$("#adminform").find( 'textarea[name="title"]' ).val(params.data[0].link);
+	$("#adminform").find( 'textarea[name="link"]' ).val(params.data[0].link);
 	$("#adminform").find( 'textarea[name="tags"]' ).val(params.data[0].tags);
 	$("#adminform").find( 'textarea[name="content"]' ).val(params.data[0].content);
 	$("#adminform").find( 'select[name="category"]').val(params.data[0].catId);
@@ -214,8 +214,37 @@ function addCodeBlock()
 	});
 }
 
-function addLink()
+function addLinkTag()
 { 
+  var linkUrl = $('#adminform').find('input[name="linkUrl"]').val();
+  
+  $('#content').selection('insert', {
+			text: '<a class="inTextLink" href="' + linkUrl + '">',
+			mode: 'before'
+	});
+	$('#content').selection('insert', {
+			text: '</a>',
+			mode: 'after'
+	});
+}
+
+function addImageTag()
+{
+  var imgUrl   = $('#adminform').find('input[name="imgUrl"]').val();
+  var thumbUrl = $('#adminform').find('input[name="thumbUrl"]').val();
+  var imgName  = $('#adminform').find('input[name="imgName"]').val();
+  
+  var polImgLoc  = $('#polImgLoc').val();
+  var polImgRot  = $('#polImgRot').val();
+  
+  $('#content').selection('insert', {
+			text: '<div class="polImgDiv polImgLoc' + polImgLoc + ' polImgRot' + polImgRot + '" name="' + imgName + '"><img class="polImage" onClick="ShowImage(\'' + imgUrl + '\', \'Image\')" src="' + thumbUrl + '" alt="',
+			mode: 'before'
+	});
+  $('#content').selection('insert', {
+			text: '" /></div>',
+			mode: 'after'
+	});
 }
 
 function formatCodeBlock()

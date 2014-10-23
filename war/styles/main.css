@@ -1,6 +1,8 @@
-body {border:0px; margin:0px; padding:0px; font-size:15px; background:url('../imgs/bg.png');font-family:Handlee}
+body {border:0px; margin:0px; padding:0px; font-size:12px; background:url('../imgs/bg.png');font-family:Handlee}
 a {}
 h3{text-align:center;font-size:120%;font-family:Courgette;}
+ul{text-indent:0px;}
+ol{text-indent:0px;}
 .home-bar {position:fixed; top:0px; left:0%; right: 0px; width:15%; padding:0px; padding-right:0.3%;text-align:right; border:0px; border-right:2px solid black; border-radius:0% 9% 9% 0%;background:url('../imgs/icon-bg.png');box-shadow:0px 0px 9px #000000 inset;z-index:99999;}
 .home-bar:hover{cursor:pointer;}
 .home-logo {width:81%;padding-top:3%;}
@@ -57,3 +59,24 @@ h3{text-align:center;font-size:120%;font-family:Courgette;}
 .loginHeader{border:0px;border-bottom:2px double grey;padding:0.9%;margin-bottom:3%;background: url('../imgs/pbg.png');overflow:hidden;z-index:1;}
 .loginDiv{position:fixed;top:15%;left:33%;right:33%;font-family:'Courgette';border:1px solid grey;text-align:center;padding:0px;padding-bottom:3%;border-radius:12%;overflow:hidden;background:url('../imgs/icon-bg.png');}
 .adminPostList{float:right;width:33%;margin:3%;margin-top:0px;}
+.inTextLink{color:#3333cc;}
+.inTextLink:hover{color:#cccc33;}
+.inTextImg{width:30%;border:1px solid black;border-radius:3%;overflow:hidden;}
+.albImgDiv{position:relative; width:15%; display:inline-block; border:2px solid black; margin:0.6%;border-radius:9%; overflow:hidden; box-shadow:0px 0px 6px #121212 inset;}
+.albImgDiv:hover {cursor:pointer;}
+.albImgDiv::before{}
+.albImgDiv::after{content:attr(name); position:absolute; bottom:0px; top:84%; left:0px; right:0px; border:0px; border-top:2px dotted black;text-align:center;vertical-align:middle; background-color:#c3c3cc; box-shadow:0px 0px 2px #121212; font-size:90%;}
+.polImgDiv{ position:relative; width:15%; border:2px solid black; margin:0.6%; margin-top:0.3%; text-indent:0px; border-radius:9%; overflow:hidden; box-shadow:0px 0px 6px #121212 inset;}
+.albImg{width:100%;height:auto;}
+.polImgDiv:hover {cursor:pointer;}
+.polImgDiv::before{}
+.polImgDiv::after{content:attr(name); position:absolute; bottom:0px; top:84%; left:0px; right:0px; border:0px; border-top:2px dotted black;text-align:center;vertical-align:middle; background-color:#c3c3cc; box-shadow:0px 0px 2px #121212; font-size:90%;}
+.polImgLoc1{float:right;margin-right:0px;}
+.polImgLoc2{float:left;margin-left:0px;}
+.polImgRot1{-ms-transform: rotate(-2deg); -webkit-transform: rotate(-2deg); transform: rotate(-2deg);}
+.polImgRot2{-ms-transform: rotate(3deg); -webkit-transform: rotate(3deg); transform: rotate(3deg);}
+.polImage {width:102%;}
+.stageBG { position:fixed; left:0%; width:0%; right:0%; top:0%; bottom:0%; margin: 0px; padding: 0px; height:0%; opacity:0.72; filter:alpha(opacity=69); background-color:rgb(0, 0, 0); z-index:-1;  font-size: 168%; color: rgb(255, 242, 242); font-width: bold; font-family: Courgette, Verdana; text-align: center; text-shadow: rgb(210, 210, 210) 0px 0px 3px; } 
+.stageImg { position:fixed; left:0%; width:0%; right:0%; top:0%; bottom:0%; margin: 0px; padding: 0px; height:0%; opacity:1.0; filter:alpha(opacity=100); color: rgb(210, 210, 210); z-index:999999; } 
+.ShowImageImg { border: 3px double white; z-index:999999; height:99%; width:auto; border-radius:3%; -moz-border-radius:3%; overflow:hidden;} 
+.closeImg { position:fixed; top:3%; right:9%; background-image: url('images/close.png'); background-size: 100% auto; background-repeat:no-repeat; cursor: pointer; font-size: 450%; z-index:999999; } 

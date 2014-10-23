@@ -58,5 +58,7 @@
 		<servlet-name>defaultServlet</servlet-name>
 		<servlet-class>com.ensinthanaigal.server.admin.DefaultServlet</servlet-class>
 	</servlet>
+	
+	<jsp-file>/dbUpdate.jsp</jsp-file>
 
 </web-app>

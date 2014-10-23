@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import com.ensinthanaigal.data.Post;
 import com.ensinthanaigal.server.util.AdminUtil;
+import com.ensinthanaigal.server.util.Category;
 import com.google.appengine.api.datastore.Text;
 
 public class AdminServlet extends HttpServlet {
@@ -55,10 +56,11 @@ public class AdminServlet extends HttpServlet {
 							request.getParameter("category"), "category");
 					String link = AdminUtil.checkForNullOrEmpty(
 							request.getParameter("link"), "link");
-					boolean testMode = Boolean.TRUE;
-					if (AdminUtil.isNullOrEmpty(request
-							.getParameter("testMode"))) {
-						testMode = Boolean.FALSE;
+					boolean testMode = Boolean.FALSE;
+					String testModeStr = request.getParameter("testmode");
+					if (AdminUtil.isNotNullOrEmpty(testModeStr)
+							&& testModeStr.equals("on")) {
+						testMode = Boolean.TRUE;
 					}
 
 					EntityManagerFactory emfInstance = Persistence
@@ -85,7 +87,7 @@ public class AdminServlet extends HttpServlet {
 					post.setContent(new Text(content));
 					post.setTags(tags);
 					post.setCategory(Integer.valueOf(category));
-					post.setLink(new Text(link));
+					post.setLink(link);
 					post.setTestMode(testMode);
 
 					entityManager.getTransaction().begin();
@@ -95,6 +97,18 @@ public class AdminServlet extends HttpServlet {
 					entityManager.getTransaction().commit();
 
 					log.log(Level.INFO, "Post inserted successfully");
+
+					String postedUrl = "http://ensinthanaigal.appspot.com/"
+							+ Category.getLabel(Integer.valueOf(category))
+							+ "/" + title;
+					boolean isDevelopmentMode = Boolean.valueOf(System
+							.getProperty("developmentmode"));
+					if (isDevelopmentMode == Boolean.FALSE) {
+						if (!post.isTestMode() && action == AdminUtil.CREATE) {
+							AdminUtil.postTweet(postedUrl);
+						}
+					}
+
 				}
 
 			}

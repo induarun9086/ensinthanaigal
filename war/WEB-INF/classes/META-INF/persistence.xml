@@ -12,4 +12,13 @@
             <property name="datanucleus.ConnectionURL" value="appengine"/>
         </properties>
     </persistence-unit>
+     <persistence-unit name="credentials">
+        <provider>org.datanucleus.api.jpa.PersistenceProviderImpl</provider>
+        <class>com.ensinthanaigal.data.Credentials</class>
+        <properties>
+            <property name="datanucleus.NontransactionalRead" value="true"/>
+            <property name="datanucleus.NontransactionalWrite" value="true"/>
+            <property name="datanucleus.ConnectionURL" value="appengine"/>
+        </properties>
+    </persistence-unit>
 </persistence>

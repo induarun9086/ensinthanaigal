@@ -77,11 +77,11 @@ function getPath(path, addHistory)
   testMode     = getParameterByName("testMode");
 	
 	uriParts     = path.split('/');
-	var catId    = catLinks.indexOf(uriParts[0]);
+	var catId    = catLinks.indexOf("/"+ uriParts[1]+"/");
 	var link     = catLinks[catId];
 	var stateObj = { catId: catId, link: path };
 	
-  if(uriParts[1] == "")
+  if(uriParts[2] == "")
   {
     if(catId == 0)
     {
@@ -118,7 +118,7 @@ function getPath(path, addHistory)
   }
   else
   {
-    $.get( "/getpage", { category: catId, link: uriParts[1], testmode: testMode }).done(function( data ) 
+    $.get( "/getpage", { category: catId, link: uriParts[2], testmode: testMode }).done(function( data ) 
     {
       $(".content-frame").html(createPost(data, stateObj, link, addHistory));
 			formatCodeBlock();

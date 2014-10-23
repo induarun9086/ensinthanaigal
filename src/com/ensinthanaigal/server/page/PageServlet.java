@@ -38,12 +38,12 @@ public class PageServlet extends HttpServlet {
 			if (AdminUtil.isNotNullOrEmpty(postId)) {
 				query = query + " and p.postID = " + postId;
 			} else if (AdminUtil.isNotNullOrEmpty(link)) {
-				query = query + " and p.link = " + link;
+				query = query + " and p.link = '" + link + "'";
 			}
 			boolean testMode = Boolean.TRUE;
 			if (!(test == null)) {
 				testMode = Boolean.valueOf(test);
-				query += "and p.testMode = " + testMode;
+				query += " and p.testMode = " + testMode;
 			}
 
 			TypedQuery<Object[]> q = entityManager.createQuery(query,
@@ -61,7 +61,7 @@ public class PageServlet extends HttpServlet {
 				jsonObj.put("tags", result[4]);
 				jsonObj.put("postedAt", result[5]);
 				jsonObj.put("testMode", result[6]);
-				jsonObj.put("link", ((Text) result[7]).getValue());
+				jsonObj.put("link", result[7].toString());
 				jsonArr.put(jsonObj);
 			}
 			data.put("data", jsonArr);
