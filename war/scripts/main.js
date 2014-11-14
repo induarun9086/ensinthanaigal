@@ -446,13 +446,13 @@ function formatCodeBlock()
     ftxt = "";
     i = 0;
     
-    while(lines[i] != null)
+    while(i < lines.length)
     {
       var words = lines[i].split(/ /);
       
       j = 0;
       
-      while(words[j] != null)
+      while(j < words.length)
       {
         if(words[j].search("<span") != -1)
         {
