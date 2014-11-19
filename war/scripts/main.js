@@ -452,6 +452,23 @@ function formatCodeBlock()
       
       j = 0;
       
+      ftxt += '<span style="font-size: 72%; color: grey;">' + lineNum++;
+      
+      if(lineNum <= 10)
+      {
+        ftxt += "   ";
+      }
+      else if(lineNum <= 100)
+      {
+        ftxt += "  ";
+      }
+      else
+      {
+        ftxt += " ";
+      }
+      
+      ftxt += "| </span>";
+      
       while(j < words.length)
       {
         if(words[j].search("<span") != -1)
@@ -511,28 +528,12 @@ function formatCodeBlock()
         j++;
       }
       
-      ftxt += '\n  <span style="font-size: 72%; color: grey;">' + lineNum++;
-      
-      if(lineNum <= 10)
-      {
-        ftxt += "   ";
-      }
-      else if(lineNum <= 100)
-      {
-        ftxt += "  ";
-      }
-      else
-      {
-        ftxt += " ";
-      }
-      
-      
-      ftxt += "| </span>";
-      
       if(endSpan < 2)
       {
         ftxt += "</span>";
       }
+      
+      ftxt += "\n";
       
       i++;
     }
