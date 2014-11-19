@@ -1,14 +1,17 @@
+<!-- Indices written at Fri, 14 Nov 2014 16:43:09 CET -->
 
-<!-- Indices written at Mon, 21 Jul 2014 14:25:18 CEST -->
+<datastore-indexes>
 
-<datastore-indexes />
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Post" ancestor="false" source="auto">
+        <property name="testMode" direction="asc"/>
+        <property name="postedAt" direction="desc"/>
+    </datastore-index>
 
-<!-- Used 24 times in query history -->
-<datastore-index kind="Post" ancestor="false" source="auto">
-	<property name="category" direction="asc" />
-	<property name="testMode" direction="asc" />
-	<property name="postedAt" direction="desc" />
-</datastore-index>
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Post" ancestor="false" source="auto">
+        <property name="testMode" direction="asc"/>
+        <property name="postedAt" direction="asc"/>
+    </datastore-index>
 
 </datastore-indexes>
-

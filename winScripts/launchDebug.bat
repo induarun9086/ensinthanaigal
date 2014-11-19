@@ -1,3 +1,3 @@
 cd ..
-dev_appserver.cmd --disable_update_check war
+dev_appserver.cmd --port=8081 --disable_update_check war
 pause

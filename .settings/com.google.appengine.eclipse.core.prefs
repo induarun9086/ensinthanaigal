@@ -6,4 +6,4 @@ gaeHrdEnabled=true
 gaeLaunchAppInBrowser=false
 googleCloudSqlEnabled=false
 localDevMySqlEnabled=true
-ormEnhancementInclusions=src/com/ensinthanaigal/data/Post.java
+ormEnhancementInclusions=src/com/ensinthanaigal/data/Post.java|src/com/ensinthanaigal/data/Credentials.java
