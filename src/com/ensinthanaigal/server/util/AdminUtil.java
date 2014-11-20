@@ -38,7 +38,7 @@ public class AdminUtil {
 		HttpSession session = request.getSession();
 		Object adminLogin = session.getAttribute("admin_login");
 		if (adminLogin != null) {
-			return Boolean.valueOf((boolean) adminLogin);
+			return Boolean.valueOf(adminLogin.toString());
 		}
 		return false;
 	}
