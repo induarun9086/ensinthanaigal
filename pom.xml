@@ -10,7 +10,7 @@
 
 	<properties>
 		<appengine.target.version>
-	1.9.0</appengine.target.version>
+			1.9.0</appengine.target.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<build.directory>./war/WEB-INF</build.directory>
 		<datanucleus.version>3.1.3</datanucleus.version>
@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>datanucleus-enhancer</artifactId>
-			<version>3.1.1</version>
+			<version>3.0.1</version>
 		</dependency>
 
 		<!-- JPA dependencies -->
