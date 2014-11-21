@@ -3,3 +3,4 @@
 /war/WEB-INF/classes/com
 /target
 /war/WEB-INF/appengine-generated
+!/war/WEB-INF/appengine-generated/local_db.bin

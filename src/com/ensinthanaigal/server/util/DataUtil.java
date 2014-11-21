@@ -9,6 +9,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import com.ensinthanaigal.data.Credentials;
+
 public class DataUtil {
 	public static Map<String, String> getCredentials(String type) {
 
@@ -17,6 +19,7 @@ public class DataUtil {
 		EntityManagerFactory emfInstance = Persistence
 				.createEntityManagerFactory("credentials");
 		EntityManager entityManager = emfInstance.createEntityManager();
+
 		try {
 			String query = "Select c.parameterName,c.parameterValue from Credentials c where "
 					+ "c.type = '" + type + "'";

@@ -50,5 +50,4 @@ public class Credentials {
 	public void setType(String type) {
 		this.type = type;
 	}
-
 }
