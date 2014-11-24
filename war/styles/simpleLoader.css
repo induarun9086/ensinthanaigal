@@ -1,17 +1,19 @@
 .progress {
-height:45px;
-width:45px;
-margin:12px auto;
+width:6%;
+height:0px;
+margin:3% auto;
+padding:0px;
+padding-bottom:6%;
 position:relative;
--webkit-animation: rotation 1.5s infinite linear;
--moz-animation: rotation 1.5s infinite linear;
--o-animation: rotation 1.5s infinite linear;
-animation: rotation 1.5s infinite linear;
-border-left:12px solid rgba(0,69,69,.8);
-border-right:12px solid rgba(0,69,180,.8);
-border-bottom:12px solid rgba(0,180,69,.8);
-border-top:12px solid rgba(0,180,180,.8);
+-webkit-animation: rotation 0.81s infinite linear;
+-moz-animation: rotation 0.81s infinite linear;
+-o-animation: rotation 0.81s infinite linear;
+animation: rotation 0.81s infinite linear;
+border:3px double rgb(81,81,81);
+border-left:3px solid rgb(0,0,0);
 border-radius:100%;
+box-shadow:0px 0px 2px 1px #000000, 0px 0px 2px 1px #000000 inset; -moz-box-shadow:0px 0px 2px 1px #000000, 0px 0px 2px 1px #000000 inset; -webkit-box-shadow:0px 0px 2px 1px #000000, 0px 0px 2px 1px #000000 inset;
+background-color:rgba(120, 120, 120, 0.69);
 }
 
 @-webkit-keyframes rotation {
@@ -33,3 +35,4 @@ to {-o-transform: rotate(359deg);}
 from {transform: rotate(0deg);}
 to {transform: rotate(359deg);}
 }
+

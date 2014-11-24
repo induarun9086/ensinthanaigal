@@ -27,7 +27,7 @@ function ShowImage(path, title)
     stageDiv.style.right = "0px";
     stageDiv.style.width = "99%";
     stageDiv.style.height = "99%";
-    stageDiv.style.zIndex = "16";
+    stageDiv.style.zIndex = "99999";
     stageDiv.style.padding = "0.5%";
     imgDiv.style.marginTop = "3%";
     imgDiv.style.marginLeft = "9%";
@@ -56,7 +56,7 @@ function ShowImage(path, title)
            imgWidth  = stageImg.offsetWidth - 9;
          }
          
-         var closeRight = ((stageDiv.offsetWidth - imgWidth)/2) - 12;
+         var closeRight = ((stageDiv.offsetWidth - imgWidth)/2) - 3;
          var closeTop   = ((stageDiv.offsetHeight - imgHeight)/2) - 3;
          
          imagData = '<span class="closeImg" title="Close" onClick="StopImage()" style="';

@@ -1,16 +1,17 @@
 body {border:0px; margin:0px; padding:0px; font-size:12px; background:url('../imgs/bg.png');font-family:Handlee}
 a {}
 h3{text-align:center;font-size:120%;font-family:Courgette;}
+h4{margin:1%;padding:1%;text-align:center;font-size:111%;font-family:Courgette;}
 ul{text-indent:0px;}
 ol{text-indent:0px;}
-.home-bar {position:fixed; top:0px; left:0%; right: 0px; width:15%; padding:0px; padding-right:0.3%;text-align:right; border:0px; border-right:2px solid black; border-radius:0% 9% 9% 0%;background:url('../imgs/icon-bg.png');box-shadow:0px 0px 9px #000000 inset;z-index:99999;}
+.home-bar {position:fixed; top:0px; left:0%; right: 0px; width:15%; padding:0px; padding-right:0.3%;text-align:right; border:0px; border-right:2px solid black; border-radius:0% 9% 9% 0%;background:url('../imgs/icon-bg.png');box-shadow:0px 0px 9px #000000 inset;z-index:999;}
 .home-bar:hover{cursor:pointer;}
 .home-logo {width:81%;padding-top:3%;}
 .fav-icon {float:left;height:96%;width:15%;padding-top:3%;padding-left:3%;}
-.header-bar {position:fixed;top:0px;border:0px; border-bottom:3px black double; padding:0.42%; margin:0px; padding-left:16%; padding-right:18%; background-color: lightgrey; width:66%; font-family:Courgette; background:url('../imgs/header-bg.jpg'); box-shadow:0px 0px 33px #111111;color:#121212;z-index:9999;}
+.header-bar {position:fixed;top:0px;border:0px; border-bottom:3px black double; padding:0.42%; margin:0px; padding-left:16%; padding-right:18%; background-color: lightgrey; width:66%; font-family:Courgette; background:url('../imgs/header-bg.jpg'); box-shadow:0px 0px 33px #111111;color:#121212;z-index:998;}
 .header-nav {display:inline-block; margin:0px; padding:0.9%; border:0px; border-left: 2px black solid; border-right: 2px black solid; border-radius:33%; font-size: 108%; box-shadow:0px 0px 3px #333333, 0px 0px 3px #000000 inset; background: url('../imgs/icon-bg.png'); text-shadow:0px 0px 9px #ffffff;font-weight:bold;}
 .header-nav:hover {cursor:pointer;text-shadow:0px 0px 12px #ff3333;color:#000000;box-shadow:0px 0px 1px #eeeeee;}
-.social-bar {position:fixed; top:0px; right: 0%; width:9%; text-align:center; border:0px;border-left:2px solid black; border-radius:12% 0% 0% 12%; margin-left: auto;margin-right: auto;vertical-align: middle;padding-top:0.54%;padding-bottom:0.33%;background:url('../imgs/icon-bg.png');box-shadow:0px 0px 9px #000000 inset;z-index:99999;}
+.social-bar {position:fixed; top:0px; right: 0%; width:9%; text-align:center; border:0px;border-left:2px solid black; border-radius:12% 0% 0% 12%; margin-left: auto;margin-right: auto;vertical-align: middle;padding-top:0.54%;padding-bottom:0.33%;background:url('../imgs/icon-bg.png');box-shadow:0px 0px 9px #000000 inset;z-index:999;}
 .social-logo {width:27%;box-shadow:0px 0px 3px #000000;border-radius:100%;}
 .social-logo:hover {cursor:pointer; }
 .home-content-scroller {position:fixed; top:12%; left:12%; right:12%; bottom:45%; padding:0px; text-align:center; border:2px solid black; border-radius:9%; overflow:hidden; box-shadow:0px 0px 12px #111111;}
@@ -76,7 +77,7 @@ ol{text-indent:0px;}
 .polImgRot1{-ms-transform: rotate(-2deg); -webkit-transform: rotate(-2deg); transform: rotate(-2deg);}
 .polImgRot2{-ms-transform: rotate(3deg); -webkit-transform: rotate(3deg); transform: rotate(3deg);}
 .polImage {width:102%;}
-.stageBG { position:fixed; left:0%; width:0%; right:0%; top:0%; bottom:0%; margin: 0px; padding: 0px; height:0%; opacity:0.72; filter:alpha(opacity=69); background-color:rgb(0, 0, 0); z-index:-1;  font-size: 168%; color: rgb(255, 242, 242); font-width: bold; font-family: Courgette, Verdana; text-align: center; text-shadow: rgb(210, 210, 210) 0px 0px 3px; } 
+.stageBG { position:fixed; left:0%; width:0%; right:0%; top:0%; bottom:0%; margin: 0px; padding: 0px; height:0%; opacity:0.81; filter:alpha(opacity=69); background-color:rgb(0, 0, 0); z-index:-1;  font-size: 168%; color: rgb(255, 242, 242); font-width: bold; font-family: Courgette, Verdana; text-align: center; text-shadow: rgb(210, 210, 210) 0px 0px 3px; z-index:999998;} 
 .stageImg { position:fixed; left:0%; width:0%; right:0%; top:0%; bottom:0%; margin: 0px; padding: 0px; height:0%; opacity:1.0; filter:alpha(opacity=100); color: rgb(210, 210, 210); z-index:999999; } 
 .ShowImageImg { border: 3px double white; z-index:999999; height:99%; width:auto; border-radius:3%; -moz-border-radius:3%; overflow:hidden;} 
-.closeImg { position:fixed; top:3%; right:9%; background-image: url('images/close.png'); background-size: 100% auto; background-repeat:no-repeat; cursor: pointer; font-size: 450%; z-index:999999; } 
+.closeImg { position:fixed; top:3%; right:3%; background-image: url('images/close.png'); background-size: 100% auto; background-repeat:no-repeat; cursor: pointer; z-index:999999; } 
