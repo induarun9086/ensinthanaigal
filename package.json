@@ -1,0 +1,28 @@
+{
+  "name": "ensinthanaigal",
+  "description": "Personal website of Indumathi",
+  "version": "0.0.1",
+  "private": true,
+  "license": "tbd",
+  "author": "Indumathi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/induarun9086/ensinthanaigal.git"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-session": "^1.17.1",
+    "cookie-parser": "^1.4.5",
+    "google-auth-library": "^6.0.0",
+    "@google-cloud/datastore": "^5.0.0",
+    "@google-cloud/storage": "^5.0.0",
+    "multer": "^1.4.1",
+    "@sendgrid/mail": "^7.1.1"
+  }
+}
