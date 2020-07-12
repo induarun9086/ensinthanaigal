@@ -66,6 +66,9 @@
             <div class="new-post-list">
               <div class="progress" v-show="loading == true"></div>
               <span v-show="((loading == false) && (lastErr != 0))"> <br /> <h4> No Posts Yet :( </h4> <br /> </span>
+              <ul v-show="postList.length > 0">
+                <li class="postLink" v-for="post in postList" @click="loadPost(post)"> {{ post.title }} </li>  
+              </ul>
             </div>
           </div>
           <div class="home-pop-posts"> 
@@ -73,8 +76,28 @@
             <div class="pop-post-list">
               <div class="progress" v-show="loading == true"></div>
               <span v-show="((loading == false) && (lastErr != 0))">  <br /> <h4> No Posts Yet :( </h4> <br />  </span>
+              <ul v-show="postList.length > 0">
+                <li class="postLink" v-for="post in postList" @click="loadPost(post)"> {{ post.title }} </li>  
+              </ul>
             </div>
           </div>
+        </div>
+        <div v-if="((dataReq == true) && (lastErr == 0))">
+          <div class="post-path">
+            <span class="pathLink" @click="loadUrl('/')"> Home </span>
+            &nbsp;>>&nbsp;<span class="pathLink" @click="loadUrl('/' + postData[0].cats[0] + '/')"> {{ postData[0].cats[0] }} </span>
+            &nbsp;>>&nbsp;<span class="pathLink" @click="loadPost(postData[0])"> {{ postData[0].url }} </span>
+          </div>
+          <div class="post-data">
+            <div class="post-title"> {{ postData[0].title }} </div>
+            <span class="post-date">
+              <span class="post-date-date"> {{ getTSDate(postData[0].ts) }} </span><br />
+              <span class="post-date-month"> {{ getTSMonthStr(postData[0].ts) }} </span><br />
+              <span class="post-date-year"> {{ getTSYear(postData[0].ts) }}</span><br />
+            </span>
+            <span class="post-tags"> Tags&nbsp;:&nbsp; <span v-for="key in postData[0].keys"> {{ key }},&nbsp; </span> </span>
+            <div class="post-body" v-html="postData[0].data"> </div>
+          </div><br /><br />
         </div>
       </div>
       

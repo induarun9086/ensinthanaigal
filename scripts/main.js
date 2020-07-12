@@ -86,6 +86,19 @@ function onLoadFn() {
             
             return str;
           },
+          getTSDate: function(ts) {
+            var dt = new Date(ts);
+            return dt.getDate();
+          },
+          getTSMonthStr: function(ts) {
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var dt = new Date(ts);
+            return months[dt.getMonth()];
+          },
+          getTSYear: function(ts) {
+            var dt = new Date(ts);
+            return dt.getFullYear();
+          },
           popState: function(e) {
             this.loadUrl(window.location.pathname, false);
           },
@@ -183,10 +196,12 @@ function onLoadFn() {
           formatCodeBlocks: function(data) {
             var fcode = data;
             
-            let re = /<pre(.*?)codeBlock(.*?)>([\s\S]*?)<\/pre>/;
-            let code = re.exec(data);
-            if((code != null) && (code.length == 4)) {
-              fcode = data.replace(re, '<pre' + '$1' + 'codeBlock' + '$2' + '>' + formatCodeBlock(code[3]) + '</pre>');
+            for(var i = 0; i < 10; i++) {
+              let re = new RegExp('<pre(.*?)codeBlock' + i + '(.*?)>([\\s\\S]*?)<\/pre>');
+              let code = re.exec(fcode);
+              if((code != null) && (code.length == 4)) {
+                fcode = fcode.replace(re, '<pre class="codeBlock" id="codeBlock' + i + '">' + formatCodeBlock(code[3]) + '</pre>');
+              }
             }
             
             return fcode;

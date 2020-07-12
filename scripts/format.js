@@ -157,7 +157,7 @@ function formatCodeBlock(txt)
           endSpan = 1; 
         }
       }
-      else if(words[j].search(/if|else|for|while|do|void|int|char|unsigned|signed|long|short/) == 0)
+      else if(words[j].search(/if|else|for|while|do|void|int|char|unsigned|signed|long|short|import|public|private|protected|String|class|return|this|static|throws|extends/) == 0)
       {
         if(endSpan < 2) 
         { 
