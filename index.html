@@ -18,7 +18,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet" type="text/css">
 	
 	<script type="text/javascript" src="/scripts/vue.js"></script>
-  <script type="text/javascript" src="/scripts/format.js"></script>
   <script type="text/javascript" src="/scripts/main.js"></script>
 	
   <title>என் சிந்தனைகள் - A Sweet Trail of my memories</title>
@@ -45,7 +44,13 @@
       </div>
      
       <div class="content-frame">
-        <div id="imgStage" class="imgStage"> <span class="imgStageClose" onclick="hideImage()"> &nbsp;X&nbsp; </span> <img id="imgStageImg" class="imgStageImg" /> </div>
+        <div id="imgStage" class="imgStage">
+          <span id="imgStageName" class="imgStageName"></span>
+          <span id="imgStagePrev" class="imgStagePrev" onclick="showPrevImage()"> &lt; </span>
+          <span id="imgStageNext" class="imgStageNext" onclick="showNextImage()"> &gt; </span>
+          <span class="imgStageClose" onclick="hideImage()"> &nbsp;X&nbsp; </span>
+          <img id="imgStageImg" class="imgStageImg" onclick="hideImage()" />
+        </div>
         <div  v-show="currLevel == 0">
           <div class="back-button" @click="currHomeImgIdx += (numHomeImgs - 1)"> <img class="home-nav-button" src="/imgs/back.png" /></div>
           <div class="home-content-scroller" id="home-content-scroller">

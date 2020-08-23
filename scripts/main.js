@@ -1,21 +1,37 @@
-const insQuotes = [
-  'You dont take a photograph, you make it <br /> - Ansel Adams',
-  'There are no rules for good photographs, there are only good photographs. <br /> - Ansel Adams',
-  'A photograph is a portrait painted by the sun <br /> - unknown',
-  'A work of art which did not begin in emotion is not art <br /> - Paul Cezanne',
-  'Great art picks up where nature ends <br /> - Marc Chagall',
-  'Art is not what you see, but what you make others see <br /> - Edgar Degas',
-  'A Good artist has less time than ideas <br /> - Martin Kippenberger',
-  'I saw the angel in the marble and carved until I set him free <br /> - Michelangelo'
-];
+/* image id of the image currently shown */
+var currImgId = "";
 
 function showImage(imgId) {
+  currImgId = imgId;
   document.getElementById("imgStageImg").src = document.getElementById(imgId).src;
+  document.getElementById("imgStageName").innerHTML = document.getElementById(imgId).name;
   document.getElementById("imgStage").style.display = "block";
 }
 
+function getImageList() {
+  var list = Array.from(document.getElementsByClassName("ImgThumbLink"));
+  return list.sort();
+}
+
+function showPrevImage() {
+  var list = getImageList();
+  var idx  = list.indexOf(document.getElementById(currImgId));
+  idx--;
+  idx = ((idx < 0)?(list.length - 1):(idx));
+  showImage(list[idx].id);
+}
+
+function showNextImage() {
+  var list = getImageList();
+  var idx  = list.indexOf(document.getElementById(currImgId));
+  idx = ((idx + 1) % list.length);
+  showImage(list[idx].id);
+}
+
 function hideImage() {
+  currImgId = "";
   document.getElementById("imgStage").style.display = "none";
+  document.getElementById("imgStageName").innerHTML = "";
   document.getElementById("imgStageImg").src = "";
 }
 
@@ -175,7 +191,6 @@ function onLoadFn() {
                   if((this.status == 200) || (this.status == 304)) {
                     var postData = JSON.parse(this.responseText);
                     if(postData.length > 0) {
-                      postData[0].data = vueObj.formatCodeBlocks(postData[0].data);
                       vueObj.postData = postData;
                       vueObj.lastErr  = 0;
                       document.title  = vueObj.postData[0].title;
@@ -192,31 +207,6 @@ function onLoadFn() {
             } else {
               /* Do nothing */
             }
-          },
-          formatCodeBlocks: function(data) {
-            var fcode = data;
-            
-            for(var i = 0; i < 10; i++) {
-              let re = new RegExp('<pre(.*?)codeBlock' + i + '(.*?)>([\\s\\S]*?)<\/pre>');
-              let code = re.exec(fcode);
-              if((code != null) && (code.length == 4)) {
-                fcode = fcode.replace(re, '<pre class="codeBlock" id="codeBlock' + i + '">' + formatCodeBlock(code[3]) + '</pre>');
-              }
-            }
-            
-            return fcode;
-          }
-        },
-        computed: {
-          randomQuote: function() {
-            var rStr = "";
-            
-            if((this.loading == false) && (this.lastErr == 0)) {
-              var rIdx = Math.round(Math.random() * insQuotes.length);
-              rStr = insQuotes[rIdx];
-            }
-            
-            return rStr;
           }
         },
         mounted: function() {
